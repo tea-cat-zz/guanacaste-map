@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='utf-8' />
+	<title>Puestos Estaciones y Turismo</title>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		#map .mapboxgl-popup {
+			width: 300px;
+			padding: 0;
+		}
+
+		#map .mapboxgl-popup-content {
+			padding: 0;
+		}
+
+		.popup-header {
+			height: 140px;
+			display: block;
+			overflow: hidden;
+		}
+
+		.popup-image {
+			width: 100%;
+			height: 140px;
+			overflow: hidden;
+			background-color: black;
+		}
+
+		.popup-header img {
+			width: 100%;
+			height: auto;
+			margin: 400 0 0 -400px;
+		}
+
+		.popup-header h3 {
+			display: block;
+			position: absolute;
+			color: white;
+			top: 80px;
+			left: .5rem;
+			font-size: 1.5rem;
+			line-height: 1.6rem;
+			font-weight: normal;
+			height: 1.6rem;
+			overflow: hidden;
+			white-space: no-wrap;
+			font-family: Arial, Helvetica, "Helvetica Neue", sans;
+			text-shadow: 1px 1px 1px #000;
+			text-overflow: ellipsis;
+		}
+
+		.popup-description {
+			display: block;
+			padding: .75rem;
+			font-size: 1rem;
+		}
+
+		.popup-description p {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div id='map'></div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww'; // replace this with your access token
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x', // replace this with your style URL
+      center: [-85.493040, 10.891421],
+      zoom: 10,
+    });
+    // code from the next step will go here
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['turismo'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup()
+    .setLngLat(feature.geometry.coordinates)
+  // hey taylor
+    .setHTML(
+      '<div class="popup-header">' + 
+        '<h3>' + feature.properties.Estación + '</h3>' + 
+        '<div class="popup-image">' + 
+          '<img src="' + feature.properties.Image + 
+          '" alt="Image del Estación ' + feature.properties.Estación + '"/>' + 
+        '</div>' + 
+      '</div>' + 
+      '<div class="popup-description">' + 
+        '<p>' + feature.properties.description + '</p>' + 
+      '</div>'
+    )
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(map);
+  });
+	</script>
+</body>
+
+</html>
+
+</html>
