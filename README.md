@@ -3,7 +3,7 @@ Created with CodeSandbox
 
 ## Embed code
 ```html
-<iframe src="https://acao.github.io/guanacaste-map/" width="100%" height="400" />
+<iframe src="https://tea-cat.github.io/guanacaste-map/" width="100%" height="400" />
 ```
 
 ## Setup
