@@ -21,7 +21,7 @@
 		}
 
 		#map .mapboxgl-popup {
-			width: 300px;
+			width: 240px;
 			padding: 0;
 		}
 
@@ -36,44 +36,58 @@
 		}
 
 		.popup-image {
-			width: 100%;
+			width: 240px;
 			height: 140px;
 			overflow: hidden;
 			background-color: black;
 		}
 
 		.popup-header img {
-			width: 100%;
+			width: 240px;
 			height: auto;
-			margin: 400 0 0 -400px;
+			margin: 600 0 0 -600px;
 		}
 
 		.popup-header h3 {
 			display: block;
-			position: absolute;
-			color: white;
-			top: 80px;
-			left: .5rem;
-			font-size: 1.5rem;
-			line-height: 1.6rem;
-			font-weight: normal;
-			height: 1.6rem;
-			overflow: hidden;
-			white-space: no-wrap;
-			font-family: Arial, Helvetica, "Helvetica Neue", sans;
-			text-shadow: 1px 1px 1px #000;
-			text-overflow: ellipsis;
+		    position: absolute;
+		    color: white;
+		    margin-top: .5rem;
+		    left: .5rem;
+		    font-size: 1.2rem;
+		    line-height: 1.4rem;
+		    font-weight: normal;
+		    font-family: Arial, Helvetica, "Helvetica Neue", sans;
+		    text-shadow: 1px 1px 1px #000;
+		    text-overflow: ellipsis;
 		}
 
 		.popup-description {
 			display: block;
 			padding: .75rem;
-			font-size: 1rem;
+			font-size: .8rem;
+			line-height: .95rem;
+			color: #444;
 		}
 
 		.popup-description p {
 			margin: 0;
 			padding: 0;
+		}
+		.popup-button {
+			margin-top: 0.5rem;
+			display: block;
+			text-decoration: none;
+			font-size: .9rem;
+			border: 1px solid #05A0CE;
+			color: #05A0CE;
+		    padding: 0.5rem;
+		    text-align: center;
+		    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+		}
+		.popup-button:hover, .popup-button:focus {
+			color: white;
+			background-color: #05A0CE;
 		}
 	</style>
 </head>
@@ -86,7 +100,7 @@
       container: 'map',
       style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x', // replace this with your style URL
       center: [-85.493040, 10.891421],
-      zoom: 10,
+      zoom: 9.18,
     });
     // code from the next step will go here
     map.on('click', function(e) {
@@ -99,6 +113,7 @@
   }
 
   var feature = features[0];
+
 
   var popup = new mapboxgl.Popup()
     .setLngLat(feature.geometry.coordinates)
@@ -113,6 +128,7 @@
       '</div>' + 
       '<div class="popup-description">' + 
         '<p>' + feature.properties.description + '</p>' + 
+        '<a class="popup-button" href="' + feature.properties.Link + '"> Más informacíon</a>' +
       '</div>'
     )
     .setLngLat(feature.geometry.coordinates)
