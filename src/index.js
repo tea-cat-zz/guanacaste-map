@@ -41,9 +41,11 @@ const getPopup = feature => new mapboxgl.Popup().setHTML(popupComponent(feature)
 const createLegendItems = featureSet => {
   const div = document.createElement('div');
   const span = document.createElement('span');
+  const labelSpan = document.createElement('span');
   span.className = `marker ${featureSet.name}-marker`;
-  span.innerHTML = featureSet.label || 'No label specified';
+  labelSpan.innerHTML = featureSet.label || 'No label specified';
   div.appendChild(span);
+  div.appendChild(labelSpan);
   document.getElementById('legend-items').appendChild(div);
 };
 
