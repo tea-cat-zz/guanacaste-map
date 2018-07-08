@@ -9,14 +9,20 @@ const ACCESS_TOKEN =
   'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww';
 
 export default {
+  LAYER_ID: 'turismo',
+  SOURCE_LAYER: 'Turismo',
+  FLY_TO_ZOOM_LEVEL: 12,
+  ANIMATION_DURATION: 2000,
   MAP,
   ACCESS_TOKEN,
-  SOURCE_LAYER: 'Turismo',
   TYPES: [
     {
       name: 'biological',
       label: 'Biological'
     },
-    { name: 'tourist', label: 'Touristo' }
+    {
+      name: 'tourist',
+      label: 'Touristo'
+    }
   ]
 };

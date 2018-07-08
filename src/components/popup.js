@@ -8,8 +8,16 @@ export default feature =>
       />
     </div>
   </div>
-  <div class="popup-description">
-    <p>${feature.properties.description}</p>
-    <a class="popup-button" href="${feature.properties.link}">Más informacíon</a>
+  <div class="popup-content">
+    <div class="popup-description">
+      <p>${feature.properties.description}</p>
+    </div>
+    <a
+      class="popup-button"
+      href="${feature.properties.link}"
+      target="_new"
+      >
+      Más informacíon
+    </a>
   </div>
   `;
