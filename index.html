@@ -5,192 +5,23 @@
 	<meta charset='utf-8' />
 	<title>Puestos Estaciones y Turismo</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+	<link href='src/index.css' rel='stylesheet' />
+
 	<style>
-		body {
-			margin: 0;
-			padding: 0;
-		}
 
-		#map {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			width: 100%;
-		}
-
-		#map .mapboxgl-popup {
-			width: 240px;
-			padding: 0;
-		}
-
-		#map .mapboxgl-popup-content {
-			padding: 0;
-		}
-
-		.popup-header {
-			height: 140px;
-			display: block;
-			overflow: hidden;
-		}
-
-		.popup-image {
-			width: 240px;
-			height: 140px;
-			overflow: hidden;
-			background-color: black;
-		}
-
-		.popup-header img {
-			width: 240px;
-			height: auto;
-			margin: 600 0 0 -600px;
-		}
-
-		.popup-header h3 {
-			display: block;
-		    position: absolute;
-		    color: white;
-		    margin-top: .5rem;
-		    left: .5rem;
-		    font-size: 1.2rem;
-		    line-height: 1.4rem;
-		    font-weight: normal;
-		    font-family: Arial, Helvetica, "Helvetica Neue", sans;
-		    text-shadow: 1px 1px 1px #000;
-		    text-overflow: ellipsis;
-		}
-
-		.popup-description {
-			display: block;
-			padding: .75rem;
-			font-size: .8rem;
-			line-height: .95rem;
-			color: #444;
-		}
-
-		.popup-description p {
-			margin: 0;
-			padding: 0;
-		}
-		.popup-button {
-			margin-top: 0.5rem;
-			display: block;
-			text-decoration: none;
-			font-size: .9rem;
-			border: 1px solid #05A0CE;
-			color: #05A0CE;
-		    padding: 0.5rem;
-		    text-align: center;
-		    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
-		}
-		.tourist-marker {
-			width: 10px;
-			height: 10px;
-			background-color: orange;
-			border: 1px darkorange; 
-			opacity: .87;
-		}
-		.biological-marker {
-			width: 10px;
-			height: 10px;
-			border-radius: 50%;
-			background-color: darkgreen; 
-			border: 1px solid darkslategray;
-		}
-		.popup-button:hover, .popup-button:focus {
-			color: white;
-			background-color: #05A0CE;
-		}
-		.legend {
-		    background-color: #fff;
-		    border-radius: 3px;
-		    bottom: 30px;
-		    box-shadow: 4px 2px 2px darkgrey;
-		    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-		    padding: 10px;
-		    position: absolute;
-		    right: 10px;
-		    z-index: 1;
-		}
-
-		.legend h4 {
-		    margin: 0 0 10px;
-		}
-
-		.legend div span {
-		    display: inline-block;
-		    height: 10px;
-		    margin-right: 5px;
-		    width: 10px;
-}
 	</style>
 </head>
 
 <body>
-	<div id='map'></div>
-		<div class='legend'>
-		    <h4>Puestos Estaciónes y Tourismos</h4>
-		    <div><span class="biological-marker"></span>Biological</div>
-		    <div><span class="tourist-marker"></span>Touristo</div>
-		</div>
-	<script>
-		mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww'; // replace this with your access token
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x', // replace this with your style URL
-      center: [-85.493040, 10.891421],
-      zoom: 9.18,
-    });
-
- 	function getFeatures(map, symbolType) {
- 		return map.querySourceFeatures('composite', {
-		   sourceLayer: 'Turismo',
-		   filter: [ '==', 'symbol', symbolType ],
-		});
- 	}
-
- 	function applyMarkers(features, className) {
- 		features.forEach(function(feature) {
- 			 // create a HTML element for each feature
-		  let el = document.createElement('div');
-		  el.className = className;
-
-		   let markerPopup = new mapboxgl
-		   		.Popup()
-    			.setHTML(
-			      '<div class="popup-header">' + 
-			        '<h3>' + feature.properties.Estación + '</h3>' + 
-			        '<div class="popup-image">' + 
-			          '<img src="' + feature.properties.Image + 
-			          '" alt="Image del Estación ' + feature.properties.Estación + '"/>' + 
-			        '</div>' + 
-			      '</div>' + 
-			      '<div class="popup-description">' + 
-			        '<p>' + feature.properties.description + '</p>' + 
-			        '<a class="popup-button" href="' + feature.properties.link + '"> Más informacíon</a>' +
-			      '</div>'
-	    );
-
-	  // make a marker for each feature and add to the map
-	  	new mapboxgl.Marker(el)
-		  .setLngLat(feature.geometry.coordinates)
-		  .setPopup(markerPopup)
-		  .addTo(map)
-		});
- 	}
-
-    map.on('load', function() {
-    	var biologicalResults = getFeatures(map, 'biological');
-    	var touristResults = getFeatures(map, 'tourist');
-
-		applyMarkers(biologicalResults, 'biological-marker');
-		applyMarkers(touristResults, 'tourist-marker');
- 
-    });
-
-	</script>
+	<div id="map"></div>
+	<div id="legend">
+	    <h4>Puestos Estaciónes y Tourismos</h4>
+			<div id="legend-items">
+			</div>
+	</div>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+	<script src='src/index.js'></script>
 </body>
 
 </html>
