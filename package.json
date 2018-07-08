@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open -d docs",
-    "build": "parcel build index.html -d docs"
+    "build": "parcel build index.html -d docs --public-url ./guanacaste-map/"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
