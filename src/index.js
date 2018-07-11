@@ -2,9 +2,9 @@
 
 import config from './config';
 import popupComponent from './components/popup';
-import legendComponent from './components/legend';
+// import legendComponent from './components/legend';
 
-const { ACCESS_TOKEN, MAP, TYPES, LAYER_ID, ANIMATION_DURATION } = config;
+const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION } = config;
 
 const DEFAULT_MAP = {
   container: 'map',
