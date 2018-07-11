@@ -13,12 +13,3 @@ export default symbolTypes =>
           <div onClick="noFilter()">Toggle Off Filters</div>
 			</div>
 	</div>`;
-
-// const div = document.createElement('div');
-// const span = document.createElement('span');
-// const labelSpan = document.createElement('span');
-// span.className = `marker ${symbolType.name}-marker`;
-// labelSpan.innerHTML = symbolType.label || 'No label specified';
-// div.appendChild(span);
-// div.appendChild(labelSpan);
-// document.getElementById('legend-items').appendChild(div);
