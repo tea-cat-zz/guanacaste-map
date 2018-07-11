@@ -1,15 +1,10 @@
+/* global mapboxgl */
+
 import config from './config';
 import popupComponent from './components/popup';
+import legendComponent from './components/legend';
 
-const {
-  ACCESS_TOKEN,
-  MAP,
-  SOURCE_LAYER,
-  TYPES,
-  LAYER_ID,
-  FLY_TO_ZOOM_LEVEL,
-  ANIMATION_DURATION
-} = config;
+const { ACCESS_TOKEN, MAP, TYPES, LAYER_ID, ANIMATION_DURATION } = config;
 
 const DEFAULT_MAP = {
   container: 'map',
@@ -25,41 +20,7 @@ const map = new mapboxgl.Map(
   Object.assign(DEFAULT_MAP, MAP)
 );
 
-window.exampleMap = map;
-
-// MARKERS
-
-const createMarker = (feature, className) =>
-  new mapboxgl.Marker(getMarkerElement(feature, className))
-    .setLngLat(feature.geometry.coordinates)
-    .addTo(map);
-
-// make a marker for each feature and add to the map
-const createMarkers = (features, className) =>
-  features.map(feature => createMarker(feature, className));
-
-// Generate the marker element on the fly in the DOM, using createElement
-const getMarkerElement = (feature, className) => {
-  // create a HTML element for each feature
-  const markerElement = document.createElement('div');
-  // append default marker classname to provided class name
-  markerElement.className = `marker ${className}`;
-
-  return markerElement;
-};
-
-// LEGEND ITEMS
-
-const createLegendItem = symbolType => {
-  const div = document.createElement('div');
-  const span = document.createElement('span');
-  const labelSpan = document.createElement('span');
-  span.className = `marker ${symbolType.name}-marker`;
-  labelSpan.innerHTML = symbolType.label || 'No label specified';
-  div.appendChild(span);
-  div.appendChild(labelSpan);
-  document.getElementById('legend-items').appendChild(div);
-};
+window.map = map;
 
 // HANDLE POPUPS
 
@@ -71,10 +32,9 @@ const showPopup = feature => {
     .setLngLat(feature.geometry.coordinates)
     .setHTML(popupComponent(feature))
     .addTo(map);
-  popup.on('close', e => {
+  popup.on('close', () => {
     map.flyTo({
       center: DEFAULT_MAP.center,
-      zoom: DEFAULT_MAP.zoom,
       duration: ANIMATION_DURATION
     });
   });
@@ -89,7 +49,6 @@ map.on('click', LAYER_ID, e => {
   setTimeout(() => {
     map.flyTo({
       center: feature.geometry.coordinates,
-      zoom: FLY_TO_ZOOM_LEVEL,
       duration: ANIMATION_DURATION
     });
     showPopup(feature);
@@ -97,22 +56,19 @@ map.on('click', LAYER_ID, e => {
 });
 // HANDLE MAP LOAD
 
-// Retrieve the source feature data from mapbox
-const getFeatures = symbolType =>
-  map.querySourceFeatures('composite', {
-    sourceLayer: SOURCE_LAYER,
-    filter: ['==', 'symbol', symbolType]
-  });
+window.handleFilter = symbolType => {
+  map.setFilter(LAYER_ID, ['==', 'symbol', symbolType]);
+};
+
+window.noFilter = () => {
+  map.setFilter(LAYER_ID, null);
+};
 
 // When the map loads, generate the markers
 map.on('load', () => {
-  const featureData =
-    TYPES &&
-    TYPES.map(symbolType => {
-      const features = getFeatures(symbolType.name);
-      createLegendItem(symbolType);
-
-      // get the feature featureData and then create markers
-      // return createMarkers(features, `${symbolType.name}-marker`);
-    });
+  const nav = new mapboxgl.NavigationControl();
+  map.addControl(nav, 'top-left');
+  //
+  // const legend = document.getElementById(`legend`);
+  // legend.innerHTML = legendComponent(TYPES);
 });

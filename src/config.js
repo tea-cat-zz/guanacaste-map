@@ -11,18 +11,21 @@ const ACCESS_TOKEN =
 export default {
   LAYER_ID: 'turismo',
   SOURCE_LAYER: 'Turismo',
-  FLY_TO_ZOOM_LEVEL: 12,
+  FLY_TO_ZOOM_LEVEL: 9.9,
   ANIMATION_DURATION: 2000,
+  LEGEND_TITLE: 'Puestos Estaciónes y Tourismos',
   MAP,
   ACCESS_TOKEN,
   TYPES: [
     {
       name: 'biological',
-      label: 'Biological'
+      label: 'Biological',
+      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`
     },
     {
       name: 'tourist',
-      label: 'Touristo'
+      label: 'Touristo',
+      icon: `<svg><use href="assets/svg/park-11.svg"></use></svg>`
     }
   ]
 };
