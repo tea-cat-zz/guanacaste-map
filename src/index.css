@@ -67,7 +67,7 @@ body {
   line-height: .95rem;
   color: #444;
   max-height: 120px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .popup-description p {
