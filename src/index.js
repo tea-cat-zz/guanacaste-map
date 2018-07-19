@@ -65,18 +65,14 @@ window.noFilter = () => {
 };
 
 // ADD ZOOM CONTROLS TO MAP 
-map.on('load', () => {
-  const nav = new mapboxgl.NavigationControl();
+const nav = new mapboxgl.NavigationControl(() => {
   map.addControl(nav, 'top-left');
-
 // DISABLE MAP ROTATION USING RIGHT CLICK + DRAG
-map.dragRotate.disable(); 
-
+  map.dragRotate.disable(); 
 // DISABLE MAP ROTATIONS USING TOUCH ROTATION GESTURE
-map.touchZoomRotate.disableRotation(); 
+  map.touchZoomRotate.disableRotation(); 
+  showCompass: true
 
-
-  //
   // const legend = document.getElementById(`legend`);
   // legend.innerHTML = legendComponent(TYPES);
 });
