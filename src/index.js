@@ -76,9 +76,8 @@ map.on('load', () => {
 });
 
 map.setCenter(DEFAULT_MAP.center);
-console.log("center")
 map.setZoom(DEFAULT_MAP.zoom);
-console.log("zoom")
+
 
 
 document.body.addEventListener("keydown", function(event) {
@@ -88,7 +87,6 @@ document.body.addEventListener("keydown", function(event) {
 
     if(cmd_held || ctrl_held){
         map.scrollZoom.enable();
-        console.log("enabled")
     }
 });
 document.body.addEventListener("keyup", function(event) {
@@ -98,6 +96,5 @@ document.body.addEventListener("keyup", function(event) {
 
     if(key=="Meta"|| key=="Control"){
         map.scrollZoom.disable();
-        console.log("disable")
     }
 });
