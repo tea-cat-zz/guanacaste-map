@@ -64,10 +64,18 @@ window.noFilter = () => {
   map.setFilter(LAYER_ID, null);
 };
 
-// When the map loads, generate the markers
+// ADD ZOOM CONTROLS TO MAP 
 map.on('load', () => {
   const nav = new mapboxgl.NavigationControl();
   map.addControl(nav, 'top-left');
+
+// DISABLE MAP ROTATION USING RIGHT CLICK + DRAG
+map.dragRotate.disable(); 
+
+// DISABLE MAP ROTATIONS USING TOUCH ROTATION GESTURE
+map.touchZoomRotate.disableRotation(); 
+
+
   //
   // const legend = document.getElementById(`legend`);
   // legend.innerHTML = legendComponent(TYPES);
