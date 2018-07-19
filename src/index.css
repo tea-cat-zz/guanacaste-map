@@ -56,7 +56,22 @@ body {
   text-shadow: 1px 1px 1px #000;
   text-overflow: ellipsis;
 }
+.popup-header h3 a{color:white;text-decoration: none;}
 
+.mapboxgl-popup-close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 0;
+    border-radius: 0 3px 0 0;
+    cursor: pointer;
+    background-color: #05A0CE69;
+    color: #fff;
+    font-size: 1rem;
+}
+.mapboxgl-popup-close-button:hover{
+    background-color: #0a93bb69;
+}
 .popup-content {
   display: block;
   padding: .75rem;
