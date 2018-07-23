@@ -35,12 +35,16 @@ const showPopup = feature => {
   popup.on('close', () => {
     map.flyTo({
       center: DEFAULT_MAP.center,
-      duration: ANIMATION_DURATION
+      duration: ANIMATION_DURATION 
     });
   });
 
   return popup;
 };
+
+//FULL SCREEN MODE 
+
+map.addControl(new mapboxgl.FullscreenControl());
 
 // HANDLE MAP EVENTS
 
@@ -54,6 +58,7 @@ map.on('click', LAYER_ID, e => {
     showPopup(feature);
   }, 200);
 });
+
 // HANDLE MAP LOAD
 
 window.handleFilter = symbolType => {
@@ -98,3 +103,17 @@ document.body.addEventListener("keyup", function(event) {
         map.scrollZoom.disable();
     }
 });
+
+// ADD ZOOM CONTROLS TO MAP 
+const nav = new mapboxgl.NavigationControl(); 
+// DISABLE MAP ROTATION USING RIGHT CLICK + DRAG
+  map.dragRotate.disable(); 
+// DISABLE MAP ROTATIONS USING TOUCH ROTATION GESTURE
+  map.touchZoomRotate.disableRotation(); 
+//add zoom control with your options
+
+
+
+// const legend = document.getElementById(`legend`);
+// legend.innerHTML = legendComponent(TYPES); 
+
