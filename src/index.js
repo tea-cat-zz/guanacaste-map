@@ -7,9 +7,9 @@ import popupComponent from './components/popup';
 const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION } = config;
 
 const DEFAULT_MAP = {
-  container: 'map',
-  center: [-85.49304, 10.891421],
-  zoom: 9.18
+    container: 'map',
+    center:[-85.61365526723557, 10.838261234356153],
+    zoom: 9.619976883678385
 };
 
 mapboxgl.accessToken = ACCESS_TOKEN;
@@ -69,6 +69,41 @@ window.noFilter = () => {
   map.setFilter(LAYER_ID, null);
 };
 
+// When the map loads, generate the markers
+map.on('load', () => {
+  const nav = new mapboxgl.NavigationControl();
+  map.addControl(nav, 'top-left');
+  map.scrollZoom.disable();
+
+  //
+  // const legend = document.getElementById(`legend`);
+  // legend.innerHTML = legendComponent(TYPES);
+});
+
+map.setCenter(DEFAULT_MAP.center);
+map.setZoom(DEFAULT_MAP.zoom);
+
+
+
+document.body.addEventListener("keydown", function(event) {
+    var key = event.key;
+    var cmd_held = event.metaKey;
+    var ctrl_held = event.ctrlKey;
+
+    if(cmd_held || ctrl_held){
+        map.scrollZoom.enable();
+    }
+});
+document.body.addEventListener("keyup", function(event) {
+    var key = event.key;
+    var ctrl_held = event.ctrlKey;
+
+
+    if(key=="Meta"|| key=="Control"){
+        map.scrollZoom.disable();
+    }
+});
+
 // ADD ZOOM CONTROLS TO MAP 
 const nav = new mapboxgl.NavigationControl(); 
 // DISABLE MAP ROTATION USING RIGHT CLICK + DRAG
@@ -81,3 +116,4 @@ const nav = new mapboxgl.NavigationControl();
 
 // const legend = document.getElementById(`legend`);
 // legend.innerHTML = legendComponent(TYPES); 
+
