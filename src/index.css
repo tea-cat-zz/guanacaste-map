@@ -92,6 +92,12 @@ body {
   background-color: #05A0CE;
 }
 
+/* NAV TOOL*/
+.mapboxgl-ctrl-group .mapboxgl-ctrl-compass {
+transform: rotate(0);
+}
+
+.zoomOutButton {
 /* LEGEND */
 
 #legend {
