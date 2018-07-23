@@ -8,8 +8,6 @@ const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION } = config;
 
 const DEFAULT_MAP = {
     container: 'map',
-    center:[-85.61365526723557, 10.838261234356153],
-    zoom: 9.619976883678385
 };
 
 mapboxgl.accessToken = ACCESS_TOKEN;
@@ -69,22 +67,34 @@ window.noFilter = () => {
   map.setFilter(LAYER_ID, null);
 };
 
-// When the map loads, generate the markers
+//Create Compass Button that Flys to Center
+function createCompass() {
+  const leftEl = document.querySelector('.mapboxgl-ctrl-bottom-left');
+  const compass = document.createElement('div'); 
+  compass.innerHTML = `<div class="mapboxgl-ctrl mapboxgl-ctrl-group">
+      <button class="mapboxgl-ctrl-icon mapboxgl-ctrl-compass" type="button" aria-label="Reset North">    
+       <span class="mapboxgl-ctrl-compass-arrow" style="transform: rotate(0deg);"></span>   
+    </button>  
+  </div>`; 
+  compass.onclick = e => {
+    map.flyTo({
+      center: DEFAULT_MAP.center,
+    })
+  }
+leftEl.appendChild(compass);
+}
+
 map.on('load', () => {
-  const nav = new mapboxgl.NavigationControl();
+  const nav = new mapboxgl.NavigationControl({showCompass: false});
   map.addControl(nav, 'top-left');
   map.scrollZoom.disable();
+  createCompass();
 
-  //
   // const legend = document.getElementById(`legend`);
   // legend.innerHTML = legendComponent(TYPES);
 });
 
-map.setCenter(DEFAULT_MAP.center);
-map.setZoom(DEFAULT_MAP.zoom);
-
-
-
+// Press Command to Scrollzoom
 document.body.addEventListener("keydown", function(event) {
     var key = event.key;
     var cmd_held = event.metaKey;
@@ -104,16 +114,6 @@ document.body.addEventListener("keyup", function(event) {
     }
 });
 
-// ADD ZOOM CONTROLS TO MAP 
-const nav = new mapboxgl.NavigationControl(); 
-// DISABLE MAP ROTATION USING RIGHT CLICK + DRAG
-  map.dragRotate.disable(); 
-// DISABLE MAP ROTATIONS USING TOUCH ROTATION GESTURE
-  map.touchZoomRotate.disableRotation(); 
-//add zoom control with your options
-
-
 
 // const legend = document.getElementById(`legend`);
 // legend.innerHTML = legendComponent(TYPES); 
-

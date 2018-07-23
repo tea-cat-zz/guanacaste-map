@@ -1,8 +1,8 @@
 const MAP = {
   // for creating mapboxgl.Map(). container defaults to 'map'
   style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x',
-  zoom:9.8,
-  center: [-85.49304, 10.891421]
+  center:[-85.61365526723557, 10.838261234356153],
+    zoom: 9.619976883678385
 };
 
 const ACCESS_TOKEN =
@@ -11,7 +11,7 @@ const ACCESS_TOKEN =
 export default {
   LAYER_ID: 'turismo',
   SOURCE_LAYER: 'Turismo',
-  FLY_TO_ZOOM_LEVEL: 9,
+  FLY_TO_ZOOM_LEVEL: 9.619976883678385,
   ANIMATION_DURATION: 2000,
   LEGEND_TITLE: 'Puestos Estaciónes y Tourismos',
   MAP,
