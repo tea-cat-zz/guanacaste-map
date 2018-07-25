@@ -85,7 +85,7 @@ function createCompass() {
   leftEl.appendChild(compass);
 }
 
-const state = {
+let state = {
 
 }
 
@@ -141,15 +141,19 @@ map.on('load', () => {
     map.setLayoutProperty(
       layerOrSymbolType, 
       'visibility', 
-      state[layerOrSymbolType] ? 'visible' : 'none'
+      state[layerOrSymbolType] ? 'none' : 'visible'
     );
-
+  
     return;
   };
 
   window.noFilter = () => {
     map.setFilter(LAYER_ID, null);
     filteredLayers.map(layer => map.setLayoutProperty(layer.name, 'visibility', 'visible'));
+    state = {};
+    document.querySelector('.legend-item').classList.add('active');
+    
+
   };
 
   // const legend = document.getElementById(`legend`);

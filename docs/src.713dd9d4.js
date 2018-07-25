@@ -161,7 +161,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (symbolTypes) {
   return '<div>\n\t    <h4>Puestos Estaci\xF3nes y Tourismos</h4>\n\t\t\t<div id="legend-items">\n          ' + symbolTypes.map(function (symbolType) {
-    return '<div class="active" id="' + symbolType.name + '" onClick="handleFilter(\'' + symbolType.name + '\', \'' + (symbolType.type || 'symbol') + '\')">\n                  <span>' + symbolType.label + '</span>\n                </div>';
+    return '<div class="legend-item active" id="' + symbolType.name + '" onClick="handleFilter(\'' + symbolType.name + '\', \'' + (symbolType.type || 'symbol') + '\')">\n                  <span>' + symbolType.label + '</span>\n                </div>';
   }).join('') + '\n          <div onClick="noFilter()">Toggle Off Filters</div>\n\t\t\t</div>\n\t</div>';
 };
 },{}],5:[function(require,module,exports) {
@@ -302,7 +302,7 @@ map.on('load', function () {
       return;
     }
     // Toggle Layers
-    map.setLayoutProperty(layerOrSymbolType, 'visibility', state[layerOrSymbolType] ? 'visible' : 'none');
+    map.setLayoutProperty(layerOrSymbolType, 'visibility', state[layerOrSymbolType] ? 'none' : 'visible');
 
     return;
   };
@@ -312,6 +312,8 @@ map.on('load', function () {
     filteredLayers.map(function (layer) {
       return map.setLayoutProperty(layer.name, 'visibility', 'visible');
     });
+    state = {};
+    document.querySelector('.legend-item').classList.add('active');
   };
 
   // const legend = document.getElementById(`legend`);

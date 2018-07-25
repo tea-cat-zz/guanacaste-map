@@ -3,7 +3,7 @@ export default symbolTypes =>
 	    <h4>Puestos Estaciónes y Tourismos</h4>
 			<div id="legend-items">
           ${symbolTypes.map(
-            symbolType => `<div class="active" id="${symbolType.name}" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
+            symbolType => `<div class="legend-item active" id="${symbolType.name}" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
                   <span>${symbolType.label}</span>
                 </div>`
           ).join('')}

@@ -130,11 +130,13 @@ body {
 }
 
 #legend div {
+    cursor: pointer;
     margin: 2px;
     padding: 2px;
-    border-left: 2px solid transparent;
+    background-color: transparent;
 }
 
 #legend div.active {
-    border-left: 2px solid black;
+    color: white;
+    background-color: black;
 }
