@@ -3,13 +3,10 @@ export default symbolTypes =>
 	    <h4>Puestos Estaciónes y Tourismos</h4>
 			<div id="legend-items">
           ${symbolTypes.map(
-            symbolType => `
-                   <div onClick="handleFilter('${symbolType.name}')">
-                      <span class="marker ${symbolType.label}-marker">${symbolType.icon}</span>
-                      <span>${symbolType.label}</span>
-                    </div>
-                    `
-          )}
+            symbolType => `<div class="active" id="${symbolType.name}" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
+                  <span>${symbolType.label}</span>
+                </div>`
+          ).join('')}
           <div onClick="noFilter()">Toggle Off Filters</div>
 			</div>
 	</div>`;

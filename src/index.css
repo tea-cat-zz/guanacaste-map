@@ -18,6 +18,10 @@ body {
   padding: 0;
 }
 
+.mapboxgl-popup-anchor-bottom {
+  flex-direction: row;
+}
+
 #map .mapboxgl-popup-content {
   padding: 0;
   box-shadow: 1px 2px 2px #777;
@@ -125,9 +129,12 @@ body {
     margin: 0 0 10px;
 }
 
-#legend div span {
-    display: inline-block;
-    height: 10px;
-    margin-right: 5px;
-    width: 10px;
+#legend div {
+    margin: 2px;
+    padding: 2px;
+    border-left: 2px solid transparent;
+}
+
+#legend div.active {
+    border-left: 2px solid black;
 }
