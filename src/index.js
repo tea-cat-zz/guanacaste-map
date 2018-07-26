@@ -11,7 +11,6 @@ const DEFAULT_MAP = {
 };
 
 mapboxgl.accessToken = ACCESS_TOKEN;
-console.log(mapboxgl.version);
 
 // instantiate the map instance
 const map = new mapboxgl.Map(
@@ -101,9 +100,9 @@ map.on('load', () => {
   filteredLayers = filteredLayers.map(layer => {
     return {
       name: layer.id,
-      label: LAYERS[layer.id] ? LAYERS[layer.id].label : `No config for ${layer.id}`,
+      label: LAYERS[layer.id] ? LAYERS[layer.id].label : layer.id.substring(7),
       type: 'layer',
-      color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'white'
+      color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'darkgrey'
     };
   });
   const legend = document.getElementById(`legend`);
@@ -112,26 +111,18 @@ map.on('load', () => {
   // HANDLE MAP LOAD
   window.handleFilter = (layerOrSymbolType, type = null) => {
     state[layerOrSymbolType] = !state[layerOrSymbolType];
+    const isToggledOn = state[layerOrSymbolType];
     // Toggle Active Class
     const legendItem = document.getElementById(layerOrSymbolType);
     legendItem.classList.toggle('active');
-    // Toggle Symbols
+    // If Symbol, toggle for the symbol in the layer filter
     if (type === 'symbol') {
       const activeFilters = Object.keys(state).filter(key => state[key]);
-      map.setFilter(LAYER_ID, [
-        state[layerOrSymbolType] ? 'in' : '!in',
-        'symbol',
-        ...activeFilters
-      ]);
+      map.setFilter(LAYER_ID, [isToggledOn ? 'in' : '!in', 'symbol', ...activeFilters]);
       return;
     }
     // Toggle Layers
-    map.setLayoutProperty(
-      layerOrSymbolType,
-      'visibility',
-      state[layerOrSymbolType] ? 'none' : 'visible'
-    );
-
+    map.setLayoutProperty(layerOrSymbolType, 'visibility', isToggledOn ? 'none' : 'visible');
     return;
   };
 
@@ -141,9 +132,6 @@ map.on('load', () => {
     state = {};
     document.querySelector('.legend-item').classList.add('active');
   };
-
-  // const legend = document.getElementById(`legend`);
-  // legend.innerHTML = legendComponent(SOURCE_TYPES);
 });
 
 // Press Command to Scrollzoom
@@ -159,31 +147,3 @@ document.body.addEventListener('keyup', function(event) {
     map.scrollZoom.disable();
   }
 });
-
-/*map.on('load', function() {
-    map.loadImage('https://api.mapbox.com/styles/v1/guanacaste/cjj079axn0aqu2so55fx6ln2x/draft/sprite@2x.png?access_token=tk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImV4cCI6MTUzMjQ0NjY2MCwiaWF0IjoxNTMyNDQzMDU5LCJzY29wZXMiOlsiZXNzZW50aWFscyIsInNjb3BlczpsaXN0IiwibWFwOnJlYWQiLCJtYXA6d3JpdGUiLCJ1c2VyOnJlYWQiLCJ1c2VyOndyaXRlIiwidXBsb2FkczpyZWFkIiwidXBsb2FkczpsaXN0IiwidXBsb2Fkczp3cml0ZSIsInN0eWxlczp0aWxlcyIsInN0eWxlczpyZWFkIiwiZm9udHM6cmVhZCIsInN0eWxlczp3cml0ZSIsInN0eWxlczpsaXN0IiwidG9rZW5zOnJlYWQiLCJ0b2tlbnM6d3JpdGUiLCJkYXRhc2V0czpsaXN0IiwiZGF0YXNldHM6cmVhZCIsImRhdGFzZXRzOndyaXRlIiwidGlsZXNldHM6bGlzdCIsInRpbGVzZXRzOnJlYWQiLCJ0aWxlc2V0czp3cml0ZSIsInN0eWxlczpkcmFmdCIsImZvbnRzOmxpc3QiLCJmb250czp3cml0ZSIsImZvbnRzOm1ldGFkYXRhIiwiZGF0YXNldHM6c3R1ZGlvIiwiY3VzdG9tZXJzOndyaXRlIiwiYW5hbHl0aWNzOnJlYWQiXSwiY2xpZW50IjoibWFwYm94LmNvbSIsImxsIjoxNTMyMDM1ODQ0MDcyLCJpdSI6bnVsbH0.e6QkYHNuj8ZZt0Z0YNnSgQ&amp;', function(error, image) {
-        if (error) throw error;
-        map.addImage('park-11.svg', image);
-        map.addLayer({
-            "id": "points",
-            "type": "symbol",
-            "source": {
-                "type": "geojson",
-                "data": {
-                    "type": "FeatureCollection",
-                    "features": [{
-                        "type": "Feature",
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [feature.geometry]
-                        }
-                    }]
-                }
-            },
-            "layout": {
-                "icon-image": "park-11.svg",
-                "icon-size": 11
-            }
-        });
-    });
-}); */

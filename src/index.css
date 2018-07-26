@@ -130,6 +130,7 @@ body {
 }
 
 #legend div span.label {
+    text-transform: capitalize;
     display: inline-block;
     cursor: pointer;
     margin: 2px;
