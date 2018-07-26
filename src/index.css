@@ -18,6 +18,10 @@ body {
   padding: 0;
 }
 
+.mapboxgl-popup-anchor-bottom {
+  flex-direction: row;
+}
+
 #map .mapboxgl-popup-content {
   padding: 0;
   box-shadow: 1px 2px 2px #777;
@@ -107,11 +111,6 @@ body {
   background-color: #05A0CE;
 }
 
-/* NAV TOOL*/
-.mapboxgl-ctrl-group .mapboxgl-ctrl-compass {
-transform: rotate(0);
-}
-
 /* LEGEND */
 
 #legend {
@@ -130,9 +129,14 @@ transform: rotate(0);
     margin: 0 0 10px;
 }
 
-#legend div span {
-    display: inline-block;
-    height: 10px;
-    margin-right: 5px;
-    width: 10px;
+#legend div {
+    cursor: pointer;
+    margin: 2px;
+    padding: 2px;
+    background-color: transparent;
+}
+
+#legend div.active {
+    color: white;
+    background-color: black;
 }
