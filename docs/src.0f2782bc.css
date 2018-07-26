@@ -126,9 +126,11 @@ body {
 }
 
 #legend h4 {
+    margin: 0 0 10px;
 }
 
 #legend div span.label {
+    text-transform: capitalize;
     display: inline-block;
     cursor: pointer;
     margin: 2px;
