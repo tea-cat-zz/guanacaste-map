@@ -1,7 +1,7 @@
 const MAP = {
   // for creating mapboxgl.Map(). container defaults to 'map'
   style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x',
-  center:[-85.61365526723557, 10.838261234356153],
+  center: [-85.61365526723557, 10.838261234356153],
   zoom: 9.619976883678385
   //"sprite": "mapbox://sprites/mapbox/bright-v8"
 };
@@ -21,17 +21,17 @@ export default {
     {
       name: 'biological',
       label: 'Biological',
-      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`
+      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`,
+      color: 'blue'
     },
     {
       name: 'tourist',
       label: 'Touristo',
-      icon: `<svg><use href="assets/svg/park-11.svg"></use></svg>`
-      
+      color: 'red'
     }
   ],
   LAYERS: {
-    'toggle-turismo': 'Turismo',
-    'toggle-acg-unesco-2018-crtm-area-copy': 'UNESCO'
+    'toggle-turismo': { label: 'Turismo', color: '#CC0000' },
+    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CC0000' }
   }
 };

@@ -140,3 +140,11 @@ body {
     color: white;
     background-color: black;
 }
+
+.legend-key {
+  display: inline-block;
+  border-radius: 50%; /*curve border ... make a circle*/
+  width: 10px; /*size of circle*/
+  height: 10px;
+  margin-right: 10px; /*position of circle*/
+}

@@ -101,8 +101,7 @@ map.on('load', () => {
   filteredLayers = filteredLayers.map(layer => {
     return {
       name: layer.id,
-      label: LAYERS[layer.id],
-      icon: 'tea-cat',
+      label: LAYERS[layer.id].label,
       type: 'layer'
     };
   });

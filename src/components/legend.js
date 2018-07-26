@@ -7,6 +7,7 @@ export default symbolTypes =>
               symbolType => `<div class="legend-item active" id="${
                 symbolType.name
               }" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
+                  <span class="legend-key" style="background-color: ${symbolType.color}"></span>
                   <span>${symbolType.label}</span>
                 </div>`
             )
