@@ -129,14 +129,15 @@ body {
     margin: 0 0 10px;
 }
 
-#legend div {
+#legend div span.label {
+    display: inline-block;
     cursor: pointer;
     margin: 2px;
     padding: 2px;
     background-color: transparent;
 }
 
-#legend div.active {
+#legend div.active span.label {
     color: white;
     background-color: black;
 }

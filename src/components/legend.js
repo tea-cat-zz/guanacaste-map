@@ -8,7 +8,7 @@ export default symbolTypes =>
                 symbolType.name
               }" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
                   <span class="legend-key" style="background-color: ${symbolType.color}"></span>
-                  <span>${symbolType.label}</span>
+                  <span class="label">${symbolType.label}</span>
                 </div>`
             )
             .join('')}

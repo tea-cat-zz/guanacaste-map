@@ -31,7 +31,7 @@ export default {
     }
   ],
   LAYERS: {
-    'toggle-turismo': { label: 'Turismo', color: '#CC0000' },
-    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CC0000' }
+    'toggle-turismo': { label: 'Turismo', color: '#CCCC00' },
+    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CCCC00', shape: 'line' }
   }
 };

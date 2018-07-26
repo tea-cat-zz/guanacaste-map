@@ -138,8 +138,8 @@ exports.default = {
     color: 'red'
   }],
   LAYERS: {
-    'toggle-turismo': { label: 'Turismo', color: '#CC0000' },
-    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CC0000' }
+    'toggle-turismo': { label: 'Turismo', color: '#CCCC00' },
+    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CCCC00', shape: 'line' }
   }
 };
 },{}],11:[function(require,module,exports) {
@@ -161,7 +161,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (symbolTypes) {
   return '<div>\n\t    <h4>Puestos Estaci\xF3nes y Tourismos</h4>\n\t\t\t<div id="legend-items">\n          ' + symbolTypes.map(function (symbolType) {
-    return '<div class="legend-item active" id="' + symbolType.name + '" onClick="handleFilter(\'' + symbolType.name + '\', \'' + (symbolType.type || 'symbol') + '\')">\n                  <span class="legend-key" style="background-color: ' + symbolType.color + '"></span>\n                  <span>' + symbolType.label + '</span>\n                </div>';
+    return '<div class="legend-item active" id="' + symbolType.name + '" onClick="handleFilter(\'' + symbolType.name + '\', \'' + (symbolType.type || 'symbol') + '\')">\n                  <span class="legend-key" style="background-color: ' + symbolType.color + '"></span>\n                  <span class="label">' + symbolType.label + '</span>\n                </div>';
   }).join('') + '\n          <div onClick="noFilter()">Toggle Off Filters</div>\n\t\t\t</div>\n\t</div>';
 };
 },{}],6:[function(require,module,exports) {
@@ -279,7 +279,8 @@ map.on('load', function () {
     return {
       name: layer.id,
       label: LAYERS[layer.id].label,
-      type: 'layer'
+      type: 'layer',
+      color: LAYERS[layer.id].color
     };
   });
   var legend = document.getElementById('legend');
@@ -365,7 +366,7 @@ document.body.addEventListener('keyup', function (event) {
         });
     });
 }); */
-},{"./config":10,"./components/popup":11,"./components/legend":23}],9:[function(require,module,exports) {
+},{"./config":10,"./components/popup":11,"./components/legend":23}],27:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -394,7 +395,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58770' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57499' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -535,5 +536,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[9,6], null)
+},{}]},{},[27,6], null)
 //# sourceMappingURL=/src.71b46684.map

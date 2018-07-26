@@ -102,7 +102,8 @@ map.on('load', () => {
     return {
       name: layer.id,
       label: LAYERS[layer.id].label,
-      type: 'layer'
+      type: 'layer',
+      color: LAYERS[layer.id].color
     };
   });
   const legend = document.getElementById(`legend`);
