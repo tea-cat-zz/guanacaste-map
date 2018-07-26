@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open -d docs",
-    "build": "parcel build index.html -d docs --public-url /guanacaste-map/"
+    "build": "parcel build index.html -d docs --public-url /guanacaste-map/",
+    "prepush": "yarn build && yarn add . && yarn commit -m 'build'"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
