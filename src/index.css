@@ -161,9 +161,11 @@ body {
   width: 10px;
 } 
 
-.legend-item#tourist .legend-key {
+.legend-item#tourist .legend-key:before {
   border-radius: 0;
   content: url('../assets/svg/park-11.svg');
+  vertical-align: text-top;
+  margin-left: -5px;
 } 
 .legend-item#toggle-ecosistemas .legend-key {
   border-radius: 0;

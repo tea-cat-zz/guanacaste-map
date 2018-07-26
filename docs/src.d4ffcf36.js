@@ -103,7 +103,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({11:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -144,7 +144,7 @@ exports.default = {
     'toggle-ecosistemas': { label: 'Ecosistemas', color: '#000000', shape: 'square' }
   }
 };
-},{}],11:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -154,7 +154,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (feature) {
   return "<div class=\"popup-header\">\n    <h3>\n        <a\n          href=\"" + feature.properties.link + "\"\n          >\n          " + feature.properties.Estación + "\n        </a>\n    </h3>\n    <div class=\"popup-image\">\n        <a\n          href=\"" + feature.properties.link + "\"\n          >\n          <img\n            src=\"" + feature.properties.Image + "\"\n            alt=\"Image del Estaci\xF3n " + feature.properties.Estación + "\"\n          />\n        </a>\n      \n    </div>\n  </div>\n  <div class=\"popup-content\">\n    <div class=\"popup-description\">\n      <p>" + feature.properties.description + "</p>\n    </div>\n    <a\n      class=\"popup-button\"\n      href=\"" + feature.properties.link + "\"\n      >\n      M\xE1s informac\xEDon\n    </a>\n  </div>\n  ";
 };
-},{}],12:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -336,7 +336,7 @@ document.body.addEventListener('keyup', function (event) {
     map.scrollZoom.disable();
   }
 });
-},{"./config":10,"./components/popup":11,"./components/legend":12}],20:[function(require,module,exports) {
+},{"./config":11,"./components/popup":12,"./components/legend":13}],24:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -365,7 +365,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57993' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56789' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -506,5 +506,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[20,6], null)
+},{}]},{},[24,6], null)
 //# sourceMappingURL=/src.d4ffcf36.map
