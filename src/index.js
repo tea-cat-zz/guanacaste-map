@@ -7,7 +7,7 @@ import legendComponent from './components/legend';
 const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } = config;
 
 const DEFAULT_MAP = {
-    container: 'map',
+  container: 'map'
 };
 
 mapboxgl.accessToken = ACCESS_TOKEN;
@@ -20,8 +20,6 @@ const map = new mapboxgl.Map(
 );
 
 window.map = map;
-
-
 
 // HANDLE POPUPS
 
@@ -36,7 +34,7 @@ const showPopup = feature => {
   popup.on('close', () => {
     map.flyTo({
       center: DEFAULT_MAP.center,
-      duration: ANIMATION_DURATION 
+      duration: ANIMATION_DURATION
     });
   });
 
@@ -56,54 +54,45 @@ map.on('click', LAYER_ID, e => {
   }, 200);
 });
 
-//FULL SCREEN MODE 
+//FULL SCREEN MODE
 
 map.addControl(new mapboxgl.FullscreenControl());
 
-
-
-
-
 // function createLegend() {
-//  const legendEl 
+//  const legendEl
 //}
 
 //Create Compass Button that Flys to Center
 function createCompass() {
   const leftEl = document.querySelector('.mapboxgl-ctrl-bottom-left');
-  const compass = document.createElement('div'); 
+  const compass = document.createElement('div');
+
   compass.innerHTML = `<div class="mapboxgl-ctrl mapboxgl-ctrl-group">
-      <button class="mapboxgl-ctrl-icon mapboxgl-ctrl-compass" type="button" aria-label="Reset North">    
-      <span class="mapboxgl-ctrl-compass-arrow" style="transform: rotate(0deg);"></span>  
-    </button>  
+      <button class="mapboxgl-ctrl-icon mapboxgl-ctrl-compass" type="button" aria-label="Reset North"> 
+      <span class="mapboxgl-ctrl-compass-arrow" style="transform: rotate(0deg);"></span> 
+    </button> 
   </div>`;
+
   compass.onclick = () => {
     map.flyTo({
-      center: DEFAULT_MAP.center,
-    })
-  }
+      center: DEFAULT_MAP.center
+    });
+  };
   leftEl.appendChild(compass);
 }
 
-let state = {
-
-}
-
+let state = {};
 
 map.on('load', () => {
-  const nav = new mapboxgl.NavigationControl({showCompass: false});
+  const nav = new mapboxgl.NavigationControl({ showCompass: false });
   map.addControl(nav, 'top-left');
   map.scrollZoom.disable();
   createCompass();
 
-
   const layerList = map.getStyle().layers;
   let filteredLayers = layerList.filter(layer => {
     const layerName = layer.id;
-    if (
-      layerName.substring(0, 7) === 'toggle-' 
-      && layerName !== 'toggle-turismo'
-    ) {
+    if (layerName.substring(0, 7) === 'toggle-' && layerName !== 'toggle-turismo') {
       return true;
     }
     return false;
@@ -114,36 +103,35 @@ map.on('load', () => {
       name: layer.id,
       label: LAYERS[layer.id],
       icon: 'tea-cat',
-      type: 'layer',
-    }
+      type: 'layer'
+    };
   });
   const legend = document.getElementById(`legend`);
-  legend.innerHTML = legendComponent([ ...SOURCE_TYPES, ...filteredLayers ]); 
+  legend.innerHTML = legendComponent([...SOURCE_TYPES, ...filteredLayers]);
 
-
-    // HANDLE MAP LOAD
+  // HANDLE MAP LOAD
   window.handleFilter = (layerOrSymbolType, type = null) => {
     state[layerOrSymbolType] = !state[layerOrSymbolType];
-        // Toggle Active Class
+    // Toggle Active Class
     const legendItem = document.getElementById(layerOrSymbolType);
     legendItem.classList.toggle('active');
     // Toggle Symbols
     if (type === 'symbol') {
-       const activeFilters = Object.keys(state).filter(key => state[key]);
+      const activeFilters = Object.keys(state).filter(key => state[key]);
       map.setFilter(LAYER_ID, [
         state[layerOrSymbolType] ? 'in' : '!in',
-        'symbol', 
+        'symbol',
         ...activeFilters
-        ])
+      ]);
       return;
     }
     // Toggle Layers
     map.setLayoutProperty(
-      layerOrSymbolType, 
-      'visibility', 
+      layerOrSymbolType,
+      'visibility',
       state[layerOrSymbolType] ? 'none' : 'visible'
     );
-  
+
     return;
   };
 
@@ -152,8 +140,6 @@ map.on('load', () => {
     filteredLayers.map(layer => map.setLayoutProperty(layer.name, 'visibility', 'visible'));
     state = {};
     document.querySelector('.legend-item').classList.add('active');
-    
-
   };
 
   // const legend = document.getElementById(`legend`);
@@ -161,16 +147,16 @@ map.on('load', () => {
 });
 
 // Press Command to Scrollzoom
-document.body.addEventListener("keydown", function(event) {
-  const { metaKey, ctrlKey} = event;
-  if (metaKey || ctrlKey){
-      map.scrollZoom.enable();
+document.body.addEventListener('keydown', function(event) {
+  const { metaKey, ctrlKey } = event;
+  if (metaKey || ctrlKey) {
+    map.scrollZoom.enable();
   }
 });
-document.body.addEventListener("keyup", function(event) {
-  const { metaKey, ctrlKey} = event;
-  if (metaKey || ctrlKey){
-      map.scrollZoom.disable();
+document.body.addEventListener('keyup', function(event) {
+  const { metaKey, ctrlKey } = event;
+  if (metaKey || ctrlKey) {
+    map.scrollZoom.disable();
   }
 });
 
