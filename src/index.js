@@ -101,9 +101,9 @@ map.on('load', () => {
   filteredLayers = filteredLayers.map(layer => {
     return {
       name: layer.id,
-      label: LAYERS[layer.id].label,
+      label: LAYERS[layer.id] ? LAYERS[layer.id].label : `No config for ${layer.id}`,
       type: 'layer',
-      color: LAYERS[layer.id].color
+      color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'white'
     };
   });
   const legend = document.getElementById(`legend`);

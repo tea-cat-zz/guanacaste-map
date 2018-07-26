@@ -278,9 +278,9 @@ map.on('load', function () {
   filteredLayers = filteredLayers.map(function (layer) {
     return {
       name: layer.id,
-      label: LAYERS[layer.id].label,
+      label: LAYERS[layer.id] ? LAYERS[layer.id].label : 'No config for ' + layer.id,
       type: 'layer',
-      color: LAYERS[layer.id].color
+      color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'white'
     };
   });
   var legend = document.getElementById('legend');
@@ -366,7 +366,7 @@ document.body.addEventListener('keyup', function (event) {
         });
     });
 }); */
-},{"./config":10,"./components/popup":11,"./components/legend":23}],27:[function(require,module,exports) {
+},{"./config":10,"./components/popup":11,"./components/legend":23}],29:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -536,5 +536,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[27,6], null)
+},{}]},{},[29,6], null)
 //# sourceMappingURL=/src.71b46684.map
