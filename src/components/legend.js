@@ -5,7 +5,9 @@ export default symbolTypes =>
           ${symbolTypes.map(
             symbolType => `
                    <div onClick="handleFilter('${symbolType.name}')">
-                      <span class="marker ${symbolType.label}-marker">${symbolType.icon}</span>
+                      <span class="marker ${symbolType.label}-marker"><svg>${
+              symbolType.icon
+            }</svg></span>
                       <span>${symbolType.label}</span>
                     </div>
                     `
