@@ -22,17 +22,17 @@ export default {
       name: 'biological',
       label: 'Biological',
       icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`,
-      color: 'blue'
+      // color: 'blue'
     },
     {
       name: 'tourist',
       label: 'Touristo',
-      color: 'red'
+      // color: 'red'
     }
   ],
   LAYERS: {
     'toggle-turismo': { label: 'Turismo', color: '#CCCC00' },
-    'toggle-acg-unesco-2018-crtm-area-copy': { label: 'UNESCO', color: '#CCCC00', shape: 'line' },
+    'toggle-unesco': { label: 'UNESCO', color: '#CCCC00', shape: 'line' },
     'toggle-sectores':{ label: 'Sectores', color: '#449438', shape: 'square' }, 
     'toggle-ecosistemas':{ label: 'Ecosistemas', color: '#000000', shape: 'square' } 
   }
