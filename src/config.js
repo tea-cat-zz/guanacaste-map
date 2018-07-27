@@ -9,7 +9,7 @@ const MAP = {
 const ACCESS_TOKEN =
   'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww';
 
-export default {
+const config = {
   LAYER_ID: 'toggle-turismo',
   SOURCE_LAYER: 'Turismo',
   //FLY_TO_ZOOM_LEVEL: 9.619976883678385,
@@ -20,20 +20,22 @@ export default {
   SOURCE_TYPES: [
     {
       name: 'biological',
+      layerId: 'toggle-turismo',
       label: 'Biological',
-      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`,
-      // color: 'blue'
+      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`
     },
     {
+      layerId: 'toggle-turismo',
       name: 'tourist',
-      label: 'Touristo',
-      // color: 'red'
+      label: 'Touristo'
     }
   ],
   LAYERS: {
     'toggle-turismo': { label: 'Turismo', color: '#CCCC00' },
     'toggle-unesco': { label: 'UNESCO', color: '#CCCC00', shape: 'line' },
-    'toggle-sectores':{ label: 'Sectores', color: '#449438', shape: 'square' }, 
-    'toggle-ecosistemas':{ label: 'Ecosistemas', color: '#000000', shape: 'square' } 
+    'toggle-sectores': { label: 'Sectores', color: '#449438', shape: 'square' },
+    'toggle-ecosistemas': { label: 'Ecosistemas', color: '#000000', shape: 'square' }
   }
 };
+
+export default config;

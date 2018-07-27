@@ -1,17 +1,20 @@
-export default symbolTypes =>
+export default allLayers =>
   `<div>
-	    <h4>Puestos Estaciónes y Tourismos</h4>
-			<div id="legend-items">
-          ${symbolTypes
+	    <h4 class="overlay-box">Puestos Estaciónes y Tourismos</h4>
+			<div id="legend-items" class="overlay-box">
+          ${allLayers
             .map(
-              symbolType => `<div class="legend-item active" id="${
-                symbolType.name
-              }" onClick="handleFilter('${symbolType.name}', '${symbolType.type || 'symbol'}')">
-                  <span class="legend-key" style="background-color: ${symbolType.color}"></span>
-                  <span class="label">${symbolType.label}</span>
+              layer => `<div class="legend-item active" id="${layer.name}" onClick="handleFilter('${
+                layer.name
+              }', '${layer.type || 'symbol'}', ${layer.layerId ? `'${layer.layerId}'` : null})">
+                  <span class="legend-key" style="background-color: ${layer.color}"></span>
+                  <span class="label">${layer.label}</span>
                 </div>`
             )
             .join('')}
-          <div onClick="noFilter()">Toggle Off Filters</div>
+
 			</div>
+      <div id="legend-footer" class="overlay-box">
+        <div onClick="noFilter()">Ver Todas las Capas</div>
+      </div>
 	</div>`;

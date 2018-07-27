@@ -4,7 +4,8 @@
 import config from './config';
 import popupComponent from './components/popup';
 import legendComponent from './components/legend';
-import './styles/index.scss';
+import { getVisibleLayers } from './utils';
+import '../assets/styles/index.scss';
 
 const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } = config;
 
@@ -82,7 +83,7 @@ function createCompass() {
   leftEl.appendChild(compass);
 }
 
-let state = {};
+let visibleLayers = {};
 
 map.on('load', () => {
   const nav = new mapboxgl.NavigationControl({ showCompass: false });
@@ -91,48 +92,67 @@ map.on('load', () => {
   createCompass();
 
   const layerList = map.getStyle().layers;
-  let filteredLayers = layerList.filter(layer => {
-    const layerName = layer.id;
-    if (layerName.substring(0, 7) === 'toggle-' && layerName !== 'toggle-turismo') {
-      return true;
-    }
-    return false;
-  });
 
-  filteredLayers = filteredLayers.map(layer => {
-    return {
+  visibleLayers = getVisibleLayers(layerList);
+
+  let filteredLayers = layerList
+    .filter(layer => {
+      const layerName = layer.id;
+      if (layerName.substring(0, 7) === 'toggle-' && layerName !== 'toggle-turismo') {
+        return true;
+      }
+      return false;
+    })
+    .map(layer => ({
       name: layer.id,
       label: LAYERS[layer.id] ? LAYERS[layer.id].label : layer.id.substring(7),
       type: 'layer',
       color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'darkgrey'
-    };
-  });
+    }));
   const legend = document.getElementById(`legend`);
+
+  // This is where we combine the symbol layer SOURCE_TYPES with filteredLayers
   legend.innerHTML = legendComponent([...SOURCE_TYPES, ...filteredLayers]);
 
   // HANDLE MAP LOAD
-  window.handleFilter = (layerOrSymbolType, type = null) => {
-    state[layerOrSymbolType] = !state[layerOrSymbolType];
-    const isToggledOn = state[layerOrSymbolType];
+  window.handleFilter = (layerOrSymbolType, type = null, layerId = null) => {
     // Toggle Active Class
     const legendItem = document.getElementById(layerOrSymbolType);
     legendItem.classList.toggle('active');
     // If Symbol, toggle for the symbol in the layer filter
-    if (type === 'symbol') {
-      const activeFilters = Object.keys(state).filter(key => state[key]);
-      map.setFilter(LAYER_ID, [isToggledOn ? 'in' : '!in', 'symbol', ...activeFilters]);
-      return;
+    if (type === 'symbol' && layerId) {
+      visibleLayers[layerId][layerOrSymbolType] = !visibleLayers[layerId][layerOrSymbolType];
+
+      const activeSymbolLayers = Object.keys(visibleLayers[layerId]).filter(
+        key => visibleLayers[layerId][key]
+      );
+      if (activeSymbolLayers.length > 0) {
+        map.setLayoutProperty(layerId, 'visibility', 'visible');
+      }
+      if (activeSymbolLayers.length > 1) {
+        return map.setFilter(layerId, ['in', 'symbol', ...activeSymbolLayers]);
+      }
+      if (activeSymbolLayers.length === 1) {
+        return map.setFilter(layerId, ['==', 'symbol', activeSymbolLayers[0]]);
+      }
+      // TODO: Until we figure out how to setFilter of none?
+      return map.setLayoutProperty(layerId, 'visibility', 'none');
     }
+    visibleLayers[layerOrSymbolType] = !visibleLayers[layerOrSymbolType];
+    const isToggledOn = visibleLayers[layerOrSymbolType];
+
     // Toggle Layers
-    map.setLayoutProperty(layerOrSymbolType, 'visibility', isToggledOn ? 'none' : 'visible');
+    map.setLayoutProperty(layerOrSymbolType, 'visibility', isToggledOn ? 'visible' : 'none');
     return;
   };
 
   window.noFilter = () => {
-    map.setFilter(LAYER_ID, null);
     filteredLayers.map(layer => map.setLayoutProperty(layer.name, 'visibility', 'visible'));
-    state = {};
-    document.querySelector('.legend-item').classList.add('active');
+    filteredLayers.map(({ name }) => map.setFilter(name, null));
+    visibleLayers = getVisibleLayers(map.getStyle().layers);
+    const legend = document.getElementById(`legend`);
+    // This is where we combine the symbol layer SOURCE_TYPES with filteredLayers
+    legend.innerHTML = legendComponent([...SOURCE_TYPES, ...filteredLayers]);
   };
 });
 
