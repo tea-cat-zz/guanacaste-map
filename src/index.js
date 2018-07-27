@@ -3,6 +3,8 @@
 import config from './config';
 import popupComponent from './components/popup';
 import legendComponent from './components/legend';
+import compassComponent from './components/compass';
+import './styles/index.scss';
 
 const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } = config;
 
@@ -66,11 +68,7 @@ function createCompass() {
   const leftEl = document.querySelector('.mapboxgl-ctrl-bottom-left');
   const compass = document.createElement('div');
 
-  compass.innerHTML = `<div class="mapboxgl-ctrl mapboxgl-ctrl-group">
-      <button class="mapboxgl-ctrl-icon mapboxgl-ctrl-compass" type="button" aria-label="Reset North"> 
-      <span class="mapboxgl-ctrl-compass-arrow" style="transform: rotate(0deg);"></span> 
-    </button> 
-  </div>`;
+  compass.innerHTML = compassComponent();
 
   compass.onclick = () => {
     map.flyTo({

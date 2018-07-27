@@ -6,7 +6,10 @@
   "scripts": {
     "start": "parcel index.html --open -d docs",
     "build": "parcel build index.html -d docs --public-url /guanacaste-map/",
-    "prepush-disabled": "yarn build && git add . && git commit -m 'build'"
+    "precommit": "yarn lint",
+    "stylelint": "yarn exec stylelint ./src/styles",
+    "eslint": "yarn exec eslint .",
+    "lint": "yarn stylelint && yarn eslint"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
@@ -15,6 +18,26 @@
     "eslint-plugin-prettier": "^2.6.2",
     "parcel-bundler": "^1.6.1",
     "prettier": "^1.13.7",
-    "prettier-eslint": "^8.8.2"
+    "prettier-eslint": "^8.8.2",
+    "prettier-stylelint": "^0.4.2",
+    "stylelint-config-idiomatic-order": "^5.0.0",
+    "stylelint-config-recommended-scss": "^3.2.0"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.2",
+    "stylelint": "^9.4.0",
+    "stylelint-scss": "^3.2.0"
+  },
+  "stylelint": {
+    "plugins": [
+      "stylelint-scss"
+    ],
+    "extends": "stylelint-config-recommended-scss",
+    "block-no-empty": null,
+    "unit-whitelist": [
+      "em",
+      "rem",
+      "s"
+    ]
   }
 }
