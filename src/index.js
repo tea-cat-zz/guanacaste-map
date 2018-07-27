@@ -1,8 +1,10 @@
 /* global mapboxgl */
+/* eslint-disable no-irregular-whitespace */
 
 import config from './config';
 import popupComponent from './components/popup';
 import legendComponent from './components/legend';
+import './styles/index.scss';
 
 const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } = config;
 

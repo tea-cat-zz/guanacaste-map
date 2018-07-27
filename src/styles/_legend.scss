@@ -1,0 +1,68 @@
+/* LEGEND */
+
+#legend {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  font: 12px/20px Helvetica, Arial, 'Lucida Grande', sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  h4 {
+    margin: 0 0 10px;
+  }
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 50%; /*curve border ... make a circle*/
+  width: 10px; /*size of circle*/
+  height: 10px;
+  margin-right: 10px; /*position of circle*/
+}
+
+.legend-item {
+  span {
+    &.label {
+      text-transform: capitalize;
+      display: inline-block;
+      margin: 2px;
+      padding: 2px;
+      color: #777;
+    }
+  }
+  &.active {
+    span.label {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &#biological .legend-key {
+    box-sizing: border-box;
+    border: 2px solid #3c565d;
+    height: 10px;
+    width: 10px;
+  }
+  &#tourist .legend-key:before {
+    border-radius: 0;
+    content: url('../../assets/svg/park-11.svg');
+    vertical-align: text-top;
+    margin-left: -5px;
+  }
+  &#toggle-ecosistemas .legend-key {
+    border-radius: 0;
+  }
+  &#toggle-unesco .legend-key {
+    height: 3px;
+    margin-bottom: 3px;
+    border-radius: 0;
+  }
+  &#toggle-sectores .legend-key {
+    height: 2px;
+    margin-bottom: 3px;
+    border-radius: 0;
+  }
+}

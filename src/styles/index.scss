@@ -1,0 +1,15 @@
+@import 'legend';
+@import 'popup';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
