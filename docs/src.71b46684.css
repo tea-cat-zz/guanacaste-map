@@ -1,0 +1,157 @@
+/* LEGEND */
+#legend {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 4px 2px 2px darkgrey;
+  font: 12px/20px Helvetica, Arial, 'Lucida Grande', sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 1; }
+  #legend h4 {
+    margin: 0 0 10px; }
+
+.legend-key {
+  display: inline-block;
+  border-radius: 50%;
+  /*curve border ... make a circle*/
+  width: 10px;
+  /*size of circle*/
+  height: 10px;
+  margin-right: 10px;
+  /*position of circle*/ }
+
+.legend-item span.label {
+  text-transform: capitalize;
+  display: inline-block;
+  margin: 2px;
+  padding: 2px;
+  color: #777; }
+
+.legend-item.active span.label {
+  color: #000;
+  font-weight: bold; }
+
+.legend-item:hover {
+  cursor: pointer; }
+
+.legend-item#biological .legend-key {
+  box-sizing: border-box;
+  border: 2px solid #3c565d;
+  height: 10px;
+  width: 10px; }
+
+.legend-item#tourist .legend-key:before {
+  border-radius: 0;
+  content: url("park-11.2b9fa686.svg");
+  vertical-align: text-top;
+  margin-left: -5px; }
+
+.legend-item#toggle-ecosistemas .legend-key {
+  border-radius: 0; }
+
+.legend-item#toggle-unesco .legend-key {
+  height: 3px;
+  margin-bottom: 3px;
+  border-radius: 0; }
+
+.legend-item#toggle-sectores .legend-key {
+  height: 2px;
+  margin-bottom: 3px;
+  border-radius: 0; }
+
+/* POPUPS */
+.mapboxgl-popup {
+  width: 240px;
+  padding: 0; }
+
+.mapboxgl-popup-content {
+  padding: 0;
+  box-shadow: 1px 2px 2px #777; }
+
+.popup-content {
+  display: block;
+  padding: 0.75rem; }
+
+.popup-image {
+  width: 240px;
+  height: 140px;
+  overflow: hidden;
+  background-color: black; }
+
+.popup-header {
+  height: 140px;
+  display: block;
+  overflow: hidden; }
+  .popup-header img {
+    width: 240px;
+    height: auto;
+    margin: -1em 0 0 0; }
+  .popup-header h3 {
+    display: block;
+    position: absolute;
+    color: white;
+    margin-top: 0.75rem;
+    left: 0.75rem;
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    font-weight: normal;
+    font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+    text-shadow: 1px 1px 1px #000;
+    text-overflow: ellipsis; }
+    .popup-header h3 a {
+      color: white;
+      text-decoration: none; }
+
+.popup-description {
+  font-size: 0.8rem;
+  line-height: 0.95rem;
+  color: #444;
+  max-height: 120px;
+  overflow: hidden; }
+  .popup-description p {
+    margin: 0;
+    padding: 0; }
+
+.popup-button {
+  margin-top: 0.5rem;
+  display: block;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid #05a0ce;
+  color: #05a0ce;
+  padding: 0.5rem;
+  text-align: center;
+  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; }
+  .popup-button:hover, .popup-button:focus {
+    color: white;
+    background-color: #05a0ce; }
+
+.mapboxgl-popup-anchor-bottom {
+  flex-direction: row; }
+
+.mapboxgl-popup-close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
+  border-radius: 0 3px 0 0;
+  cursor: pointer;
+  background-color: #05a0ce69;
+  color: #fff;
+  font-size: 1rem; }
+  .mapboxgl-popup-close-button:hover {
+    background-color: #0a93bb69; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif; }
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
