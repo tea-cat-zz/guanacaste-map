@@ -1,5 +1,5 @@
 export default allLayers =>
-  `<div id="legend-inner" class="flex-child">
+  `<div class="flex-child">
 	    <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">Puestos Estaciónes y Tourismos</h4>
 			<div id="legend-items" class="overlay-box toggle-content">
           ${allLayers

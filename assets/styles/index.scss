@@ -1,10 +1,13 @@
+@import 'variables';
 @import 'legend';
+@import 'legend-item';
 @import 'popup';
 
 * {
   margin: 0;
   padding: 0;
 }
+
 html,
 body {
   margin: 0;
@@ -16,11 +19,24 @@ body {
 #main {
   min-height: 100%;
   display: flex;
-  flex-direction: row;
   box-sizing: border-box;
+  flex-direction: column;
+}
+
+@media (min-width: $deviceWidth) {
+  #main {
+    flex-direction: row;
+    align-self: center;
+  }
+  #map {
+    flex-direction: column;
+  }
 }
 
 #map {
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
+}
+.flex-child {
+  flex: 1;
 }
