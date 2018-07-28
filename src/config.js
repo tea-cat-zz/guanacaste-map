@@ -2,7 +2,8 @@ const MAP = {
   // for creating mapboxgl.Map(). container defaults to 'map'
   style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x',
   center: [-85.61365526723557, 10.838261234356153],
-  zoom: 9.619976883678385
+  zoom: 9.619976883678385,
+  scrollZoom: false
   //"sprite": "mapbox://sprites/mapbox/bright-v8"
 };
 
