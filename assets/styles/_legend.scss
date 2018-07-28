@@ -28,6 +28,7 @@ $deviceWidth: 720px;
 
 #legend-footer {
   text-align: center;
+  padding: 10px;
   &:hover,
   &:focus {
     cursor: pointer;
@@ -40,11 +41,13 @@ $deviceWidth: 720px;
     margin-top: 0.6em;
     position: relative;
     max-width: 20%;
+    min-width: 220px;
     display: flex;
     flex: 1;
     flex-direction: column;
     left: auto;
     right: auto;
+    order: -1;
     h4 {
       width: auto;
       text-align: left;
@@ -80,5 +83,11 @@ $deviceWidth: 720px;
     #legend-toggle-icon:before {
       content: url('../svg/down-arrow.svg');
     }
+  }
+}
+
+@media (min-width: $deviceWidth) {
+  #legend-toggle-icon {
+    display: none;
   }
 }
