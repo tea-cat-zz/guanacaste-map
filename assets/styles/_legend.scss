@@ -31,6 +31,15 @@ $deviceWidth: 720px;
   }
 }
 
+#legend-footer {
+  text-align: center;
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
 @media (min-width: $deviceWidth) {
   #legend {
     margin-top: 0.6em;
@@ -47,6 +56,9 @@ $deviceWidth: 720px;
     .toggle-content {
       display: block;
     }
+  }
+  #legend-footer {
+    text-align: left;
   }
 }
 

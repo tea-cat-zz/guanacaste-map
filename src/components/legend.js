@@ -17,6 +17,6 @@ export default allLayers =>
 
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
-        <div onClick="tcat.noFilter()">Ver Todas</div>
+        <div onClick="tcat.noFilter()">Ver Todo</div>
       </div>
 	</div>`;
