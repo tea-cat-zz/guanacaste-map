@@ -3,7 +3,6 @@
 $deviceWidth: 720px;
 
 #legend {
-  max-width: 20%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,7 +47,7 @@ $deviceWidth: 720px;
   #legend {
     margin-top: 0.6em;
     position: relative;
-    max-width: 240px;
+    max-width: 20%;
     display: flex;
     flex: 1;
     flex-direction: column;
