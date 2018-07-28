@@ -1,5 +1,32 @@
 /* LEGEND */
 
+#legend {
+  min-width: 240px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  left: 10%;
+  right: 10%;
+  border-radius: 3px;
+  h4 {
+    margin: 0 0 2px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 460px) {
+  #legend {
+    position: relative;
+    max-width: 240px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    left: auto;
+    right: auto;
+  }
+}
+
 .overlay-box {
   padding: 10px;
   opacity: 0.9;
@@ -7,18 +34,6 @@
   font-size: 0.9em;
   font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
   background-color: #fff;
-}
-
-#legend {
-  border-radius: 3px;
-  bottom: 30px;
-  position: absolute;
-  right: 10px;
-  max-width: 260px;
-  h4 {
-    margin: 0 0 2px;
-    font-size: 1.1rem;
-  }
 }
 
 .legend-key {
@@ -46,8 +61,12 @@
       font-weight: bold;
     }
   }
-  &:hover {
+  &:hover,
+  &:focus {
     cursor: pointer;
+    span.label {
+      text-decoration: underline;
+    }
   }
   &#tourist .legend-key {
     box-sizing: border-box;

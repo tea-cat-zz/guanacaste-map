@@ -1,19 +1,20 @@
 /* global mapboxgl */
 /* eslint-disable no-irregular-whitespace */
 
-import config from './config';
 import popupComponent from './components/popup';
 import legendComponent from './components/legend';
 import { getVisibleLayers } from './utils';
 import '../assets/styles/index.scss';
-
-const { ACCESS_TOKEN, MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } = config;
+import { MAP, LAYER_ID, ANIMATION_DURATION, SOURCE_TYPES, LAYERS } from './config';
 
 const DEFAULT_MAP = {
-  container: 'map'
+  container: 'map',
+  style: 'mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x',
+  center: [-85.61365526723557, 10.838261234356153],
+  zoom: 9.619976883678385
 };
-
-mapboxgl.accessToken = ACCESS_TOKEN;
+mapboxgl.accessToken =
+  'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww';
 
 // instantiate the map instance
 const map = new mapboxgl.Map(
@@ -149,7 +150,7 @@ map.on('load', () => {
   window.noFilter = () => {
     filteredLayers.map(layer => map.setLayoutProperty(layer.name, 'visibility', 'visible'));
     filteredLayers.map(({ name }) => map.setFilter(name, null));
-    visibleLayers = getVisibleLayers(map.getStyle().layers);
+    visibleLayers = getVisibleLayers(layerList);
     const legend = document.getElementById(`legend`);
     // This is where we combine the symbol layer SOURCE_TYPES with filteredLayers
     legend.innerHTML = legendComponent([...SOURCE_TYPES, ...filteredLayers]);
