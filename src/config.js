@@ -9,9 +9,9 @@ const MAP = {
 const ACCESS_TOKEN =
   'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww';
 
-const config = {
+module.exports = {
   LAYER_ID: 'toggle-turismo',
-  SOURCE_LAYER: 'Turismo',
+  SYMBOL_LAYERS: ['toggle-turismo', 'toggle-ecosistemas'],
   //FLY_TO_ZOOM_LEVEL: 9.619976883678385,
   ANIMATION_DURATION: 2000,
   LEGEND_TITLE: 'Puestos Estaciónes y Tourismos',
@@ -21,8 +21,7 @@ const config = {
     {
       name: 'biological',
       layerId: 'toggle-turismo',
-      label: 'Biological',
-      icon: `<svg><use href="assets/svg/information-11.svg"></use></svg>`
+      label: 'Biological'
     },
     {
       layerId: 'toggle-turismo',
@@ -32,10 +31,8 @@ const config = {
   ],
   LAYERS: {
     'toggle-turismo': { label: 'Turismo', color: '#CCCC00' },
-    'toggle-unesco': { label: 'UNESCO', color: '#CCCC00', shape: 'line' },
-    'toggle-sectores': { label: 'Sectores', color: '#449438', shape: 'square' },
-    'toggle-ecosistemas': { label: 'Ecosistemas', color: '#000000', shape: 'square' }
+    'toggle-unesco': { label: 'UNESCO', color: '#CCCC00' },
+    'toggle-sectores': { label: 'Sectores', color: '#449438' },
+    'toggle-ecosistemas': { label: 'Ecosistemas', color: '#000000' }
   }
 };
-
-export default config;

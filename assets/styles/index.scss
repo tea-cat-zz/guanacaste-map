@@ -1,15 +1,26 @@
 @import 'legend';
 @import 'popup';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
 
+#main {
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
 #map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+  flex: 1;
+  flex-direction: column;
 }

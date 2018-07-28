@@ -4,8 +4,8 @@
   "description": "Simple Parcel Sandbox",
   "main": "index.html",
   "scripts": {
-    "start": "rm -rf docs && parcel index.html --open -d docs",
-    "build": "rm -rf docs && parcel build index.html -d docs --public-url /guanacaste-map/",
+    "start": "rm -rf docs .cache && parcel index.html --open -d docs",
+    "build": "rm -rf docs .cache && parcel build index.html -d docs --public-url /guanacaste-map/",
     "precommit": "yarn lint",
     "stylelint": "yarn exec stylelint ./src/styles",
     "eslint": "yarn exec eslint .",

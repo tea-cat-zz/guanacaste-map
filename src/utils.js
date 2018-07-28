@@ -1,6 +1,4 @@
-import config from './config';
-
-const { SOURCE_TYPES } = config;
+import { SOURCE_TYPES } from './config';
 
 export const getVisibleLayers = layerList =>
   layerList.filter(({ id }) => id.substring(0, 7) === 'toggle-').reduce((agg, layer) => {

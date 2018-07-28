@@ -1,5 +1,5 @@
 export default allLayers =>
-  `<div>
+  `<div id="legend-inner" class="flex-child">
 	    <h4 class="overlay-box">Puestos Estaciónes y Tourismos</h4>
 			<div id="legend-items" class="overlay-box">
           ${allLayers
