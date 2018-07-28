@@ -1,9 +1,10 @@
 export default allLayers =>
-  `<div class="flex-child">
-	    <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">
-          Puestos Estaciónes y Tourismos
-          <span id="legend-toggle-icon"></span>
-      </h4>
+  `<div class="legend-wrapper">
+    <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">
+        Puestos Estaciónes y Tourismos
+        <span id="legend-toggle-icon"></span>
+    </h4>
+    <div class="flex-child legend-inner">
 			<div id="legend-items" class="overlay-box toggle-content">
           ${allLayers
             .map(
@@ -22,4 +23,5 @@ export default allLayers =>
       <div id="legend-footer" class="overlay-box toggle-content">
         <div onClick="tcat.noFilter()">Ver Todo</div>
       </div>
-	</div>`;
+	</div>
+</div>`;

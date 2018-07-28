@@ -21,7 +21,7 @@
   &.active {
     span.label {
       color: #000;
-      font-weight: bold;
+      font-weight: 400;
     }
   }
   &:hover,
@@ -57,14 +57,5 @@
     height: 2px;
     margin-bottom: 3px;
     border-radius: 0;
-  }
-}
-
-@media (min-width: $deviceWidth) {
-  .legend-item {
-    span.label {
-      margin: 2px;
-      padding: 3px 4px;
-    }
   }
 }
