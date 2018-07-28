@@ -5,20 +5,13 @@ $deviceWidth: 720px;
 #legend {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  bottom: 8px;
-  z-index: 1;
-  left: 10%;
-  right: 10%;
-  border-radius: 3px;
-  margin: 0 auto;
   h4 {
     width: 100%;
     display: block;
-    margin: 0 0 2px;
+    margin: 0;
     font-size: 1.2rem;
-    text-align: center;
     font-weight: 200;
+    padding: 16px 10px;
     &:hover,
     &:focus {
       cursor: pointer;
@@ -66,10 +59,26 @@ $deviceWidth: 720px;
 }
 
 .overlay-box {
-  padding: 10px;
+  padding: 0px 10px;
   opacity: 0.9;
   margin: 0 0 2px;
   font-size: 0.95em;
   font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
   background-color: #fff;
+}
+
+#legend {
+  #legend-toggle-icon:before {
+    display: block;
+    float: right;
+    margin-right: 1.5rem;
+    position: relative;
+    border-radius: 0;
+    content: url('../svg/up-arrow.svg');
+  }
+  &.active {
+    #legend-toggle-icon:before {
+      content: url('../svg/down-arrow.svg');
+    }
+  }
 }
