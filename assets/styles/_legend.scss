@@ -1,22 +1,39 @@
 /* LEGEND */
 
+$deviceWidth: 720px;
+
 #legend {
   min-width: 240px;
   display: block;
   position: absolute;
-  bottom: 0;
+  bottom: 8px;
   z-index: 1;
   left: 10%;
   right: 10%;
   border-radius: 3px;
   h4 {
+    display: block;
     margin: 0 0 2px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 200;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+  .toggle-content {
+    display: none;
+  }
+  &.active .toggle-content {
+    display: block;
   }
 }
 
-@media (min-width: 460px) {
+@media (min-width: $deviceWidth) {
   #legend {
+    margin-top: 0.6em;
     position: relative;
     max-width: 240px;
     display: flex;
@@ -24,6 +41,12 @@
     flex-direction: column;
     left: auto;
     right: auto;
+    h4 {
+      text-align: left;
+    }
+    .toggle-content {
+      display: block;
+    }
   }
 }
 
@@ -31,7 +54,7 @@
   padding: 10px;
   opacity: 0.9;
   margin: 0 0 2px;
-  font-size: 0.9em;
+  font-size: 0.95em;
   font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
   background-color: #fff;
 }
@@ -45,13 +68,14 @@
 }
 
 .legend-item {
+  margin-bottom: 1px;
   vertical-align: text-top;
   span {
     &.label {
       text-transform: capitalize;
       display: inline-block;
-      margin: 2px;
-      padding: 2px;
+      margin: 0;
+      padding: 8px;
       color: #777;
     }
   }
@@ -94,5 +118,14 @@
     height: 2px;
     margin-bottom: 3px;
     border-radius: 0;
+  }
+}
+
+@media (min-width: $deviceWidth) {
+  .legend-item {
+    span.label {
+      margin: 2px;
+      padding: 3px 4px;
+    }
   }
 }

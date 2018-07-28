@@ -21,8 +21,14 @@ const map = new mapboxgl.Map(
   // Set defaults, allow the config to override
   Object.assign(DEFAULT_MAP, MAP)
 );
+// debugging only
+// window.map = map;
+window.tcat = window.tcat || {};
 
-window.map = map;
+window.tcat.toggleLegend = () => {
+  const legendEl = document.getElementById('legend');
+  legendEl.classList.toggle('active');
+};
 
 // HANDLE POPUPS
 
@@ -116,7 +122,7 @@ map.on('load', () => {
   legend.innerHTML = legendComponent([...SOURCE_TYPES, ...filteredLayers]);
 
   // HANDLE MAP LOAD
-  window.handleFilter = (layerOrSymbolType, type = null, layerId = null) => {
+  window.tcat.handleFilter = (layerOrSymbolType, type = null, layerId = null) => {
     // Toggle Active Class
     const legendItem = document.getElementById(layerOrSymbolType);
     legendItem.classList.toggle('active');
@@ -147,7 +153,7 @@ map.on('load', () => {
     return;
   };
 
-  window.noFilter = () => {
+  window.tcat.noFilter = () => {
     filteredLayers.map(layer => map.setLayoutProperty(layer.name, 'visibility', 'visible'));
     filteredLayers.map(({ name }) => map.setFilter(name, null));
     visibleLayers = getVisibleLayers(layerList);
