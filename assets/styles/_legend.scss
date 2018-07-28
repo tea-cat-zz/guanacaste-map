@@ -1,4 +1,23 @@
 /* LEGEND */
+@keyframes fadeInUp {
+  from {
+    opacity: 0.5;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@mixin animated($name) {
+  -webkit-animation-duration: 600ms;
+  animation-duration: 600ms;
+  // -webkit-animation-fill-mode: both;
+  // animation-fill-mode: both;
+  animation-name: $name;
+}
 
 $deviceWidth: 720px;
 
@@ -18,17 +37,22 @@ $deviceWidth: 720px;
       text-decoration: underline;
     }
   }
-  .toggle-content {
+  .legend-inner {
+    @include animated(fadeInUp);
     display: none;
   }
-  &.active .toggle-content {
+  &.active .legend-inner {
     display: block;
   }
 }
 
+.legend-wrapper {
+  width: 100%;
+}
+
 #legend-footer {
   text-align: center;
-  padding: 10px;
+  padding: 14px;
   &:hover,
   &:focus {
     cursor: pointer;
@@ -77,11 +101,11 @@ $deviceWidth: 720px;
     margin-right: 1.5rem;
     position: relative;
     border-radius: 0;
-    content: url('../svg/up-arrow.svg');
+    content: url('../svg/down-arrow.svg');
   }
   &.active {
     #legend-toggle-icon:before {
-      content: url('../svg/down-arrow.svg');
+      content: url('../svg/up-arrow.svg');
     }
   }
 }

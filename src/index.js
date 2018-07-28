@@ -135,12 +135,11 @@ map.on('load', () => {
       );
       if (activeSymbolLayers.length > 0) {
         map.setLayoutProperty(layerId, 'visibility', 'visible');
-      }
-      if (activeSymbolLayers.length > 1) {
-        return map.setFilter(layerId, ['in', 'symbol', ...activeSymbolLayers]);
-      }
-      if (activeSymbolLayers.length === 1) {
-        return map.setFilter(layerId, ['==', 'symbol', activeSymbolLayers[0]]);
+        return map.setFilter(layerId, [
+          activeSymbolLayers.length === 1 ? '==' : 'in',
+          'symbol',
+          ...activeSymbolLayers
+        ]);
       }
       // TODO: Until we figure out how to setFilter of none?
       return map.setLayoutProperty(layerId, 'visibility', 'none');
