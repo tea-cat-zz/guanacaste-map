@@ -12,7 +12,6 @@ $deviceWidth: 720px;
   right: 10%;
   border-radius: 3px;
   margin: 0 auto;
-  width: 100%;
   h4 {
     width: 100%;
     display: block;
@@ -54,6 +53,7 @@ $deviceWidth: 720px;
     left: auto;
     right: auto;
     h4 {
+      width: auto;
       text-align: left;
     }
     .toggle-content {
