@@ -1,3 +1,5 @@
+import { TEXT as T } from "../config";
+
 export default feature =>
   `<div class="popup-header">
     <h3>
@@ -13,10 +15,10 @@ export default feature =>
           >
           <img
             src="${feature.properties.Image}"
-            alt="Image del Estación ${feature.properties.Estación}"
+            alt="${T.POPUP_IMAGE_ALT_PREFIX} ${feature.properties.Estación}"
           />
         </a>
-      
+
     </div>
   </div>
   <div class="popup-content">
@@ -27,7 +29,7 @@ export default feature =>
       class="popup-button"
       href="${feature.properties.link}"
       >
-      Más informacíon
+      ${T.POPUP_MORE_INFO}
     </a>
   </div>
   `;

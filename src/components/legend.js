@@ -1,9 +1,10 @@
+import { TEXT as T } from "../config";
 const getArg = arg => (arg ? `'${arg}'` : null);
 
 export default allLayers =>
   `<div class="legend-wrapper">
     <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">
-        Puestos Estaciónes y Tourismos
+        ${T.LEGEND_TITLE}
         <span id="legend-toggle-icon"></span>
     </h4>
     <div class="flex-child legend-inner">
@@ -18,7 +19,7 @@ export default allLayers =>
             .join("")}
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
-        <div onClick="tcat.noFilter()">Ver Todo</div>
+        <div onClick="tcat.noFilter()">${T.LEGEND_VIEW_ALL}</div>
       </div>
 	</div>
 </div>`;
