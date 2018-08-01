@@ -1,11 +1,29 @@
-import { SOURCE_TYPES, LAYERS } from './config';
+import { LAYERS } from "./config";
+
+const filteringLayers = Object.entries(LAYERS)
+  .filter(
+    ([, { filters, filterOn }]) =>
+      filterOn && filters && filters.length && filters.length > 0
+  )
+  .map(([layerName, { filters = [], filterOn }]) => {
+    return {
+      name: layerName,
+      filterOn,
+      filters
+    };
+  });
+
+export const filteringLayersList = filteringLayers.map(({ name }) => name);
+const hasToggle = ({ id }) => id.substring(0, 7) === "toggle-";
 
 export const getVisibleLayers = layerList =>
-  layerList.filter(({ id }) => id.substring(0, 7) === 'toggle-').reduce((agg, layer) => {
+  layerList.filter(hasToggle).reduce((agg, layer) => {
     let result = { [layer.id]: true };
-    if (layer.id === 'toggle-turismo') {
-      result[layer.id] = SOURCE_TYPES.filter(({ layerId }) => layerId === layer.id).reduce(
-        (agg, { name }) => Object.assign({ [name]: true }, agg),
+    let layerIndex = filteringLayersList.indexOf(layer.id);
+    if (layerIndex >= 0) {
+      const layer = filteringLayers[layerIndex];
+      result[layer.name] = layer.filters.reduce(
+        (agg, { value }) => Object.assign({ [value]: true }, agg),
         {}
       );
     }
@@ -13,17 +31,16 @@ export const getVisibleLayers = layerList =>
   }, {});
 
 export const getFilteredLayers = layerList =>
-  layerList
-    .filter(layer => {
-      const layerName = layer.id;
-      if (layerName.substring(0, 7) === 'toggle-' && layerName !== 'toggle-turismo') {
-        return true;
-      }
-      return false;
-    })
-    .map(layer => ({
+  layerList.filter(hasToggle).map(layer => {
+    const layerC = LAYERS[layer.id];
+    const hasFilters = layerC.filters && !!layerC.filters.length;
+    return {
+      ...layerC,
+      hasFilters,
+      filters:
+        hasFilters &&
+        layerC.filters.map(filter => ({ ...filter, layerId: layer.id })),
       name: layer.id,
-      label: LAYERS[layer.id] ? LAYERS[layer.id].label : layer.id.substring(7),
-      type: 'layer',
-      color: LAYERS[layer.id] ? LAYERS[layer.id].color : 'darkgrey'
-    }));
+      label: layerC && layerC.label ? layerC.label : layer.id.substring(7)
+    };
+  });
