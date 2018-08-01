@@ -7,8 +7,8 @@
 }
 
 .legend-item {
-  margin-bottom: 1px;
-  margin-left: 6px;
+  padding-bottom: 2px;
+  padding-left: 6px;
   vertical-align: text-top;
   span {
     &.label {
@@ -33,7 +33,7 @@
     }
   }
   .legend-item {
-    margin-left: 12px;
+    padding-left: 12px;
     font-size: 0.95rem;
   }
   &#toggle-turismo-tourist .legend-key {
