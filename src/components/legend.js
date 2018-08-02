@@ -1,63 +1,83 @@
+import html from "nanohtml";
+
+import { toggleLegend } from "../handlers";
+
 import { TEXT as T } from "../config";
-const getArg = arg => (arg ? `'${arg}'` : null);
+// const getArg = arg => (arg ? `'${arg}'` : null);
+
+function getLayerToggle(layerId) {
+  return function toggleLayer(e) {
+    e.preventDefault();
+    window.tcat.handleLayerToggle(layerId);
+  };
+}
+function getFilterLayerToggle(layerId) {
+  return function toggleFilterLayer(e) {
+    e.preventDefault();
+    window.tcat.handleFilterLayerToggle(layerId);
+  };
+}
+
+function getFilterItemToggle(layerId, value) {
+  return function toggleFilterItem(e) {
+    e.preventDefault();
+    window.tcat.handleFilterToggle(layerId, value);
+  };
+}
 
 export default allLayers =>
-  `<div class="legend-wrapper">
-    <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">
+  html`<div id="legend-wrapper" class="legend-wrapper">
+    <h4 class="overlay-box toggle-button" onclick="${toggleLegend}">
         ${T.LEGEND_TITLE}
         <span id="legend-toggle-icon"></span>
     </h4>
     <div class="flex-child legend-inner">
 			<div id="legend-items" class="overlay-box toggle-content">
-          ${allLayers
-            .map(layer => {
-              if (layer.hasFilters) {
-                return legendItemWithFilters(layer);
-              }
-              return legendItem(layer);
-            })
-            .join("")}
+          ${allLayers.map(layer => {
+            if (layer.hasFilters) {
+              return legendItemWithFilters(layer);
+            }
+            return legendItem(layer);
+          })}
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
-        <button class="button button-block-on-mobile" onClick="tcat.handleShowAll()">${
-          T.LEGEND_VIEW_ALL
-        }</button>
-        <button class="button button-block-on-mobile" onClick="tcat.handleHideAll()">${
-          T.LEGEND_VIEW_NONE
-        }</button>
+        <button class="button button-block-on-mobile" onclick=${
+          window.tcat.handleShowAll
+        }>${T.LEGEND_VIEW_ALL}</button>
+        <button class="button button-block-on-mobile" onclick=${
+          window.tcat.handleHideAll
+        }>${T.LEGEND_VIEW_NONE}</button>
       </div>
 	</div>
 </div>`;
 
-const legendItem = ({ name, color, label }) => `
+const legendItem = ({ name, color, label }) => html`
   <div
     class="legend-item"
     id="${name}"
-    onClick="tcat.handleLayerToggle(${getArg(name)})"
+    onclick=${getLayerToggle(name)}
   >
     <span class="legend-key" style="background-color: ${color}"></span>
     <span class="label">${label}</span>
   </div>`;
 
-const legendItemChild = ({ value, layerId, color, label }) => `
+const legendItemChild = ({ value, layerId, color, label }) => html`
     <div
       class="legend-item"
       id="${layerId}-${value}"
-      onClick="tcat.handleFilterToggle(${getArg(layerId)}, ${getArg(value)})"
+      onclick=${getFilterItemToggle(layerId, value)}
     >
       <span class="legend-key" style="background-color: ${color}"></span>
       <span class="label">${label}</span>
     </div>
 `;
 
-const legendItemWithFilters = ({ name, color, label, filters }) => `
+const legendItemWithFilters = ({ name, color, label, filters }) => html`
   <div class="legend-item" id="${name}">
     <span class="legend-key" style="background-color: ${color}"></span>
-    <span class="label" onClick="tcat.handleFilterLayerToggle(${getArg(
-      name
-    )})">${label}</span>
+    <span class="label" onclick=${getFilterLayerToggle(name)}>${label}</span>
     <div class="legend-items">
-      ${filters.map(legendItemChild).join("")}
+      ${filters.map(legendItemChild)}
     </div>
   </div>
 `;

@@ -17,22 +17,20 @@ map.layerList = [];
 // window.map = map;
 window.tcat = window.tcat || {};
 
-window.tcat.toggleLegend = () => {
-  const legendEl = document.getElementById("legend");
-  legendEl.classList.toggle("active");
-};
-
 map.on("data", () => {
   if (!map.initialLoaded) {
     handleInitialLoad(map);
+    map.initialLoaded = true;
   }
 });
 
 map.on("load", () => {
   const legendEl = document.getElementById(`legend`);
-
-  // This is where we combine the symbol layer SOURCE_TYPES with filteredLayers
-  legendEl.innerHTML = legendComponent([...map.filteredLayers]);
+  const wrapperEl = document.getElementById(`legend-wrapper`);
+  const legendInnerEl = legendComponent([...map.filteredLayers]);
+  wrapperEl
+    ? legendEl.replaceChild(legendInnerEl, wrapperEl)
+    : legendEl.appendChild(legendInnerEl);
 });
 
 // Press Command to Scrollzoom

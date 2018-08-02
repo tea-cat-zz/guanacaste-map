@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 
 import popupComponent from "./components/popup";
+import html from "nanohtml";
 
 import { getVisibleLayers, getFilteredLayers } from "./utils";
 import {
@@ -31,7 +32,6 @@ export const handleInitialLoad = map => {
   Object.entries(LAYERS).forEach(([layerId]) =>
     toggleLayer(map, layerId, LAYERS_ACTIVE)
   );
-  map.initialLoaded = true;
   map.layerList = map.getStyle().layers;
 
   map.visibleLayers = getVisibleLayers(map.layerList, false);
@@ -40,14 +40,8 @@ export const handleInitialLoad = map => {
   window.tcat.handleLayerToggle = getLayerToggleHandler(map);
   window.tcat.handleFilterToggle = getFilterToggleHandler(map);
   window.tcat.handleFilterLayerToggle = getFilterLayerToggleHandler(map);
-  window.tcat.handleShowAll = getShowAllHandler(map, {
-    layerList: map.layerList,
-    filteredLayers: map.filteredLayers
-  });
-  window.tcat.handleHideAll = getHideAllHandler(map, {
-    layerList: map.layerList,
-    filteredLayers: map.filteredLayers
-  });
+  window.tcat.handleShowAll = getShowAllHandler(map);
+  window.tcat.handleHideAll = getHideAllHandler(map);
 };
 
 export const toggleLayer = (map, layerId, isVisible = true) => {
@@ -57,9 +51,8 @@ export const toggleLayer = (map, layerId, isVisible = true) => {
 
 export function createCompass(map) {
   const leftEl = document.querySelector(".mapboxgl-ctrl-bottom-left");
-  const compass = document.createElement("div");
 
-  compass.innerHTML = `<div class="mapboxgl-ctrl mapboxgl-ctrl-group">
+  const compass = html`<div class="mapboxgl-ctrl mapboxgl-ctrl-group">
       <button class="mapboxgl-ctrl-icon mapboxgl-ctrl-compass" type="button" aria-label="Reset North"> 
       <span class="mapboxgl-ctrl-compass-arrow" style="transform: rotate(0deg);"></span> 
     </button> 
