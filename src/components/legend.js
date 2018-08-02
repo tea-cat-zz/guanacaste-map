@@ -1,27 +1,63 @@
+import { TEXT as T } from "../config";
+const getArg = arg => (arg ? `'${arg}'` : null);
+
 export default allLayers =>
   `<div class="legend-wrapper">
     <h4 class="overlay-box toggle-button" onClick="tcat.toggleLegend()">
-        Puestos Estaciónes y Tourismos
+        ${T.LEGEND_TITLE}
         <span id="legend-toggle-icon"></span>
     </h4>
     <div class="flex-child legend-inner">
 			<div id="legend-items" class="overlay-box toggle-content">
           ${allLayers
-            .map(
-              layer => `<div class="legend-item active" id="${
-                layer.name
-              }" onClick="tcat.handleFilter('${layer.name}', '${layer.type || 'symbol'}', ${
-                layer.layerId ? `'${layer.layerId}'` : null
-              })">
-                  <span class="legend-key" style="background-color: ${layer.color}"></span>
-                  <span class="label">${layer.label}</span>
-                </div>`
-            )
-            .join('')}
-
+            .map(layer => {
+              if (layer.hasFilters) {
+                return legendItemWithFilters(layer);
+              }
+              return legendItem(layer);
+            })
+            .join("")}
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
-        <div onClick="tcat.noFilter()">Ver Todo</div>
+        <button class="button button-block-on-mobile" onClick="tcat.handleShowAll()">${
+          T.LEGEND_VIEW_ALL
+        }</button>
+        <button class="button button-block-on-mobile" onClick="tcat.handleHideAll()">${
+          T.LEGEND_VIEW_NONE
+        }</button>
       </div>
 	</div>
 </div>`;
+
+const legendItem = ({ name, color, label }) => `
+  <div
+    class="legend-item"
+    id="${name}"
+    onClick="tcat.handleLayerToggle(${getArg(name)})"
+  >
+    <span class="legend-key" style="background-color: ${color}"></span>
+    <span class="label">${label}</span>
+  </div>`;
+
+const legendItemChild = ({ value, layerId, color, label }) => `
+    <div
+      class="legend-item"
+      id="${layerId}-${value}"
+      onClick="tcat.handleFilterToggle(${getArg(layerId)}, ${getArg(value)})"
+    >
+      <span class="legend-key" style="background-color: ${color}"></span>
+      <span class="label">${label}</span>
+    </div>
+`;
+
+const legendItemWithFilters = ({ name, color, label, filters }) => `
+  <div class="legend-item" id="${name}">
+    <span class="legend-key" style="background-color: ${color}"></span>
+    <span class="label" onClick="tcat.handleFilterLayerToggle(${getArg(
+      name
+    )})">${label}</span>
+    <div class="legend-items">
+      ${filters.map(legendItemChild).join("")}
+    </div>
+  </div>
+`;

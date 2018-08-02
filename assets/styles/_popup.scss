@@ -41,7 +41,7 @@
     font-size: 1.2rem;
     line-height: 1.4rem;
     font-weight: normal;
-    font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     text-shadow: 1px 1px 1px #000;
     text-overflow: ellipsis;
     a {
@@ -60,23 +60,6 @@
   p {
     margin: 0;
     padding: 0;
-  }
-}
-
-.popup-button {
-  margin-top: 0.5rem;
-  display: block;
-  text-decoration: none;
-  font-size: 0.9rem;
-  border: 1px solid #05a0ce;
-  color: #05a0ce;
-  padding: 0.5rem;
-  text-align: center;
-  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
-  &:hover,
-  &:focus {
-    color: white;
-    background-color: #05a0ce;
   }
 }
 

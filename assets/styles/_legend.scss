@@ -53,11 +53,6 @@ $deviceWidth: 720px;
 #legend-footer {
   text-align: center;
   padding: 14px;
-  &:hover,
-  &:focus {
-    cursor: pointer;
-    text-decoration: underline;
-  }
 }
 
 @media (min-width: $deviceWidth) {
@@ -87,10 +82,10 @@ $deviceWidth: 720px;
 
 .overlay-box {
   padding: 0px 10px;
-  opacity: 0.9;
   margin: 0 0 2px;
-  font-size: 0.95em;
-  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: 1em;
+  font-color: #444;
+  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
   background-color: #fff;
 }
 
@@ -101,11 +96,11 @@ $deviceWidth: 720px;
     margin-right: 1.5rem;
     position: relative;
     border-radius: 0;
-    content: url('../svg/up-arrow.svg');
+    content: url("../svg/up-arrow.svg");
   }
   &.active {
     #legend-toggle-icon:before {
-      content: url('../svg/down-arrow.svg');
+      content: url("../svg/down-arrow.svg");
     }
   }
 }

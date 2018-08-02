@@ -7,7 +7,8 @@
 }
 
 .legend-item {
-  margin-bottom: 1px;
+  padding-bottom: 2px;
+  padding-left: 6px;
   vertical-align: text-top;
   span {
     &.label {
@@ -19,7 +20,7 @@
     }
   }
   &.active {
-    span.label {
+    & > span.label {
       color: #000;
       font-weight: 400;
     }
@@ -27,22 +28,26 @@
   &:hover,
   &:focus {
     cursor: pointer;
-    span.label {
+    & > span.label {
       text-decoration: underline;
     }
   }
-  &#tourist .legend-key {
+  .legend-item {
+    padding-left: 12px;
+    font-size: 0.95rem;
+  }
+  &#toggle-turismo-tourist .legend-key {
     box-sizing: border-box;
     border: 2px solid #3c565d;
     height: 10px;
     width: 10px;
     position: relative;
   }
-  &#biological .legend-key:before {
+  &#toggle-turismo-biological .legend-key:before {
     position: relative;
     top: 3px;
     border-radius: 0;
-    content: url('../svg/park-11.svg');
+    content: url("../svg/park-11.svg");
     margin-left: -5px;
   }
   &#toggle-ecosistemas .legend-key {
