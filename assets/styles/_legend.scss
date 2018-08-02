@@ -53,11 +53,6 @@ $deviceWidth: 720px;
 #legend-footer {
   text-align: center;
   padding: 14px;
-  &:hover,
-  &:focus {
-    cursor: pointer;
-    text-decoration: underline;
-  }
 }
 
 @media (min-width: $deviceWidth) {

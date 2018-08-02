@@ -14,6 +14,7 @@ const ACCESS_TOKEN =
   "pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww";
 
 module.exports = {
+  LAYERS_ACTIVE: false,
   ANIMATION_DURATION: 2000,
   ACCESS_TOKEN,
   MAP,

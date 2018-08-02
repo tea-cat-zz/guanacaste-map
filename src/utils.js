@@ -1,4 +1,4 @@
-import { LAYERS } from "./config";
+import { LAYERS, LAYERS_ACTIVE } from "./config";
 
 const filteringLayers = Object.entries(LAYERS)
   .filter(
@@ -16,14 +16,14 @@ const filteringLayers = Object.entries(LAYERS)
 export const filteringLayersList = filteringLayers.map(({ name }) => name);
 const hasToggle = ({ id }) => id.substring(0, 7) === "toggle-";
 
-export const getVisibleLayers = layerList =>
+export const getVisibleLayers = (layerList, forceValue = LAYERS_ACTIVE) =>
   layerList.filter(hasToggle).reduce((agg, layer) => {
-    let result = { [layer.id]: true };
+    let result = { [layer.id]: forceValue };
     let layerIndex = filteringLayersList.indexOf(layer.id);
     if (layerIndex >= 0) {
       const layer = filteringLayers[layerIndex];
       result[layer.name] = layer.filters.reduce(
-        (agg, { value }) => Object.assign({ [value]: true }, agg),
+        (agg, { value }) => Object.assign({ [value]: forceValue }, agg),
         {}
       );
     }

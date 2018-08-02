@@ -19,14 +19,19 @@ export default allLayers =>
             .join("")}
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
-        <div onClick="tcat.noFilter()">${T.LEGEND_VIEW_ALL}</div>
+        <button class="button button-block-on-mobile" onClick="tcat.handleShowAll()">${
+          T.LEGEND_VIEW_ALL
+        }</button>
+        <button class="button button-block-on-mobile" onClick="tcat.handleHideAll()">${
+          T.LEGEND_VIEW_NONE
+        }</button>
       </div>
 	</div>
 </div>`;
 
 const legendItem = ({ name, color, label }) => `
   <div
-    class="legend-item active"
+    class="legend-item"
     id="${name}"
     onClick="tcat.handleLayerToggle(${getArg(name)})"
   >
@@ -36,7 +41,7 @@ const legendItem = ({ name, color, label }) => `
 
 const legendItemChild = ({ value, layerId, color, label }) => `
     <div
-      class="legend-item active"
+      class="legend-item"
       id="${layerId}-${value}"
       onClick="tcat.handleFilterToggle(${getArg(layerId)}, ${getArg(value)})"
     >
@@ -46,7 +51,7 @@ const legendItemChild = ({ value, layerId, color, label }) => `
 `;
 
 const legendItemWithFilters = ({ name, color, label, filters }) => `
-  <div class="legend-item active" id="${name}">
+  <div class="legend-item" id="${name}">
     <span class="legend-key" style="background-color: ${color}"></span>
     <span class="label" onClick="tcat.handleFilterLayerToggle(${getArg(
       name

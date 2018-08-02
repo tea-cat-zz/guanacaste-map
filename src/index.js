@@ -1,18 +1,18 @@
 /* eslint-disable no-irregular-whitespace */
 
 import legendComponent from "./components/legend";
-import { getVisibleLayers, getFilteredLayers } from "./utils";
-import {
-  getLayerToggleHandler,
-  getFilterToggleHandler,
-  getNoFilterHandler,
-  getFilterLayerToggleHandler
-} from "./handlers";
-import getMap from "./map";
+
+import getMap, { handleInitialLoad } from "./map";
+
 import "../assets/styles/index.scss";
 
 // instantiate the map instance
 const map = getMap();
+
+map.initialLoaded = false;
+map.visibleLayers = {};
+map.layerList = [];
+
 // debugging only
 // window.map = map;
 window.tcat = window.tcat || {};
@@ -22,26 +22,17 @@ window.tcat.toggleLegend = () => {
   legendEl.classList.toggle("active");
 };
 
-// HANDLE POPUPS
-
-map.visibleLayers = {};
+map.on("data", () => {
+  if (!map.initialLoaded) {
+    handleInitialLoad(map);
+  }
+});
 
 map.on("load", () => {
-  const layerList = map.getStyle().layers;
-
-  map.visibleLayers = getVisibleLayers(layerList);
-  let filteredLayers = getFilteredLayers(layerList);
-
   const legendEl = document.getElementById(`legend`);
 
   // This is where we combine the symbol layer SOURCE_TYPES with filteredLayers
-  legendEl.innerHTML = legendComponent([...filteredLayers]);
-
-  // HANDLE MAP LOAD
-  window.tcat.handleLayerToggle = getLayerToggleHandler(map);
-  window.tcat.handleFilterToggle = getFilterToggleHandler(map);
-  window.tcat.handleFilterLayerToggle = getFilterLayerToggleHandler(map);
-  window.tcat.noFilter = getNoFilterHandler(map, { layerList, filteredLayers });
+  legendEl.innerHTML = legendComponent([...map.filteredLayers]);
 });
 
 // Press Command to Scrollzoom

@@ -3,7 +3,23 @@
 /* eslint-disable no-undef */
 
 import popupComponent from "./components/popup";
-import { MAP, ANIMATION_DURATION, ACCESS_TOKEN, LAYERS } from "./config";
+
+import { getVisibleLayers, getFilteredLayers } from "./utils";
+import {
+  getLayerToggleHandler,
+  getFilterToggleHandler,
+  getShowAllHandler,
+  getHideAllHandler,
+  getFilterLayerToggleHandler
+} from "./handlers";
+
+import {
+  MAP,
+  ANIMATION_DURATION,
+  ACCESS_TOKEN,
+  LAYERS,
+  LAYERS_ACTIVE
+} from "./config";
 
 mapboxgl.accessToken = ACCESS_TOKEN;
 
@@ -11,7 +27,35 @@ const DEFAULT_MAP = {
   container: "map"
 };
 
-export function createCompass() {
+export const handleInitialLoad = map => {
+  Object.entries(LAYERS).forEach(([layerId]) =>
+    toggleLayer(map, layerId, LAYERS_ACTIVE)
+  );
+  map.initialLoaded = true;
+  map.layerList = map.getStyle().layers;
+
+  map.visibleLayers = getVisibleLayers(map.layerList, false);
+  map.filteredLayers = getFilteredLayers(map.layerList);
+  // HANDLE MAP LOAD
+  window.tcat.handleLayerToggle = getLayerToggleHandler(map);
+  window.tcat.handleFilterToggle = getFilterToggleHandler(map);
+  window.tcat.handleFilterLayerToggle = getFilterLayerToggleHandler(map);
+  window.tcat.handleShowAll = getShowAllHandler(map, {
+    layerList: map.layerList,
+    filteredLayers: map.filteredLayers
+  });
+  window.tcat.handleHideAll = getHideAllHandler(map, {
+    layerList: map.layerList,
+    filteredLayers: map.filteredLayers
+  });
+};
+
+export const toggleLayer = (map, layerId, isVisible = true) => {
+  const visibility = isVisible ? "visible" : "none";
+  map.setLayoutProperty(layerId, "visibility", visibility);
+};
+
+export function createCompass(map) {
   const leftEl = document.querySelector(".mapboxgl-ctrl-bottom-left");
   const compass = document.createElement("div");
 
@@ -57,7 +101,7 @@ export default function getMap() {
 
   Object.entries(LAYERS)
     .filter(([, layerConfig]) => layerConfig.hasPopups)
-    .map(([layerId]) => {
+    .forEach(([layerId]) => {
       map.on("click", layerId, e => {
         const feature = e.features[0];
         setTimeout(() => {
@@ -71,13 +115,12 @@ export default function getMap() {
     });
 
   //FULL SCREEN MODE
-
   map.addControl(new mapboxgl.FullscreenControl());
   // Add zoom conntrol
   const nav = new mapboxgl.NavigationControl({ showCompass: false });
   map.addControl(nav, "top-left");
   // disable scrollZoom
   map.scrollZoom.disable();
-  createCompass();
+  createCompass(map);
   return map;
 }

@@ -1,7 +1,8 @@
-@import 'variables';
-@import 'legend';
-@import 'legend-item';
-@import 'popup';
+@import "variables";
+@import "button";
+@import "legend";
+@import "legend-item";
+@import "popup";
 
 * {
   margin: 0;
@@ -13,7 +14,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 #main {

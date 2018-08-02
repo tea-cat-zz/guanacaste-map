@@ -26,7 +26,7 @@ export default feature =>
       <p>${feature.properties.description}</p>
     </div>
     <a
-      class="popup-button"
+      class="button button-block"
       href="${feature.properties.link}"
       >
       ${T.POPUP_MORE_INFO}

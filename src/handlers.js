@@ -93,17 +93,28 @@ export const getFilterToggleHandler = map => (layerId, value) => {
 /**
  * To reset the entire layer/filter state
  */
-export const getNoFilterHandler = (
-  map,
-  { filteredLayers, layerList }
-) => () => {
+export const getShowAllHandler = (map, { filteredLayers, layerList }) => () => {
   filteredLayers.map(layer =>
     map.setLayoutProperty(layer.name, "visibility", "visible")
   );
   filteredLayers.map(({ name }) => map.setFilter(name, null));
-  map.visibleLayers = getVisibleLayers(layerList);
+  map.visibleLayers = getVisibleLayers(layerList, true);
   const legendItemEls = document.querySelectorAll(`.legend-item`);
   [].forEach.call(legendItemEls, item => {
     item.classList.add("active");
+  });
+};
+
+/**
+ * To hide the entire layer/filter state
+ */
+export const getHideAllHandler = (map, { filteredLayers, layerList }) => () => {
+  filteredLayers.map(layer =>
+    map.setLayoutProperty(layer.name, "visibility", "none")
+  );
+  map.visibleLayers = getVisibleLayers(layerList);
+  const legendItemEls = document.querySelectorAll(`.legend-item`);
+  [].forEach.call(legendItemEls, item => {
+    item.classList.remove("active");
   });
 };
