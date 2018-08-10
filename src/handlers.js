@@ -1,6 +1,11 @@
 import { LAYERS } from "./config";
 import { getVisibleLayers } from "./utils";
 
+export const toggleLegend = () => {
+  const legendEl = document.getElementById("legend");
+  legendEl.classList.toggle("active");
+};
+
 /**
  Toggles the entire layer for a layer without a filter
 **/
@@ -93,12 +98,12 @@ export const getFilterToggleHandler = map => (layerId, value) => {
 /**
  * To reset the entire layer/filter state
  */
-export const getShowAllHandler = (map, { filteredLayers, layerList }) => () => {
-  filteredLayers.map(layer =>
+export const getShowAllHandler = map => () => {
+  map.filteredLayers.map(layer =>
     map.setLayoutProperty(layer.name, "visibility", "visible")
   );
-  filteredLayers.map(({ name }) => map.setFilter(name, null));
-  map.visibleLayers = getVisibleLayers(layerList, true);
+  map.filteredLayers.map(({ name }) => map.setFilter(name, null));
+  map.visibleLayers = getVisibleLayers(map.layerList, true);
   const legendItemEls = document.querySelectorAll(`.legend-item`);
   [].forEach.call(legendItemEls, item => {
     item.classList.add("active");
@@ -108,11 +113,11 @@ export const getShowAllHandler = (map, { filteredLayers, layerList }) => () => {
 /**
  * To hide the entire layer/filter state
  */
-export const getHideAllHandler = (map, { filteredLayers, layerList }) => () => {
-  filteredLayers.map(layer =>
+export const getHideAllHandler = map => () => {
+  map.filteredLayers.map(layer =>
     map.setLayoutProperty(layer.name, "visibility", "none")
   );
-  map.visibleLayers = getVisibleLayers(layerList);
+  map.visibleLayers = getVisibleLayers(map.layerList);
   const legendItemEls = document.querySelectorAll(`.legend-item`);
   [].forEach.call(legendItemEls, item => {
     item.classList.remove("active");
