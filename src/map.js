@@ -29,7 +29,7 @@ const DEFAULT_MAP = {
 };
 
 export const handleInitialLoad = map => {
-  Object.entries(LAYERS).forEach(([layerId]) =>
+  Object.keys(LAYERS).forEach(layerId =>
     toggleLayer(map, layerId, LAYERS_ACTIVE)
   );
   map.layerList = map.getStyle().layers;
@@ -72,7 +72,7 @@ export default function getMap() {
     Object.assign(DEFAULT_MAP, MAP)
   );
 
-  const popup = new mapboxgl.Popup();
+  const popup = new mapboxgl.Popup({ keepInView: true, maxWidth: "240px" });
 
   // Create a mapboxgl.Popup from the default popup component.
   const showPopup = feature => {

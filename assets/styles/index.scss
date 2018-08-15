@@ -1,3 +1,4 @@
+@import "fonts";
 @import "variables";
 @import "button";
 @import "legend";
@@ -14,7 +15,16 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $fontFamily;
+}
+
+h1,
+h3,
+h4,
+h5,
+h5,
+h6 {
+  font-family: $fontFamily;
 }
 
 #main {

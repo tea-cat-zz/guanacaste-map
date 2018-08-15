@@ -18,13 +18,14 @@ map.layerList = [];
 window.tcat = window.tcat || {};
 
 map.on("data", () => {
-  if (!map.initialLoaded) {
+  if (!map.initialLoaded && !map.loaded()) {
     handleInitialLoad(map);
     map.initialLoaded = true;
   }
 });
 
 map.on("load", () => {
+  window.map = map;
   const legendEl = document.getElementById(`legend`);
   const wrapperEl = document.getElementById(`legend-wrapper`);
   const legendInnerEl = legendComponent([...map.filteredLayers]);

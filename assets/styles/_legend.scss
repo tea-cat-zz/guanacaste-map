@@ -25,7 +25,6 @@ $deviceWidth: 720px;
   display: flex;
   flex-direction: row;
   h4 {
-    width: 100%;
     display: block;
     margin: 0;
     font-size: 1.2rem;
@@ -57,6 +56,7 @@ $deviceWidth: 720px;
 
 @media (min-width: $deviceWidth) {
   #legend {
+    -webkit-tap-highlight-color: transparent;
     margin-top: 0.6em;
     position: relative;
     max-width: 20%;
@@ -85,16 +85,16 @@ $deviceWidth: 720px;
   margin: 0 0 2px;
   font-size: 1em;
   font-color: #444;
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $fontFamily;
   background-color: #fff;
 }
 
 #legend {
   #legend-toggle-icon:before {
-    display: block;
-    float: right;
+    display: inline-block;
+    right: 0;
     margin-right: 1.5rem;
-    position: relative;
+    position: absolute;
     border-radius: 0;
     content: url("../svg/up-arrow.svg");
   }

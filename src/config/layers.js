@@ -16,10 +16,14 @@ export default {
     ]
   },
   "toggle-unesco": { label: "UNESCO", color: "#CCCC00" },
-  "toggle-sectores": { label: "Sectores", color: "#449438" },
+  "toggle-sectores": {
+    label: "Sectores",
+    color: "#449438",
+    combineWithLayers: ["sectores-nombres", "sectores-nombres-6mdotv"]
+  },
   "toggle-ecosistemas": {
     label: "Ecosistemas",
-    color: "#444",
+    color: "#444444",
     filterOn: "Name",
     filters: [
       {

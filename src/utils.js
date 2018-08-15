@@ -1,4 +1,6 @@
-import { LAYERS, LAYERS_ACTIVE } from "./config";
+import { LAYERS, LAYERS_ACTIVE, LAYER_PREFIX } from "./config";
+
+const PREFIX_LENGTH = LAYER_PREFIX.length;
 
 const filteringLayers = Object.entries(LAYERS)
   .filter(
@@ -14,7 +16,9 @@ const filteringLayers = Object.entries(LAYERS)
   });
 
 export const filteringLayersList = filteringLayers.map(({ name }) => name);
-const hasToggle = ({ id }) => id.substring(0, 7) === "toggle-";
+const hasToggle = ({ id }) => id.substring(0, PREFIX_LENGTH) === LAYER_PREFIX;
+
+// const hasToggle = ({ id }) => id;
 
 export const getVisibleLayers = (layerList, forceValue = LAYERS_ACTIVE) =>
   layerList.filter(hasToggle).reduce((agg, layer) => {
@@ -33,7 +37,7 @@ export const getVisibleLayers = (layerList, forceValue = LAYERS_ACTIVE) =>
 export const getFilteredLayers = layerList =>
   layerList.filter(hasToggle).map(layer => {
     const layerC = LAYERS[layer.id];
-    const hasFilters = layerC.filters && !!layerC.filters.length;
+    const hasFilters = layerC && layerC.filters && !!layerC.filters.length;
     return {
       ...layerC,
       hasFilters,
@@ -41,6 +45,9 @@ export const getFilteredLayers = layerList =>
         hasFilters &&
         layerC.filters.map(filter => ({ ...filter, layerId: layer.id })),
       name: layer.id,
-      label: layerC && layerC.label ? layerC.label : layer.id.substring(7)
+      label:
+        layerC && layerC.label
+          ? layerC.label
+          : layer.id.substring(PREFIX_LENGTH)
     };
   });

@@ -1,8 +1,8 @@
-import html from "nanohtml";
+import nanoHtml from "nanohtml";
 
 import { toggleLegend } from "../handlers";
 
-import { TEXT as T } from "../config";
+import { TEXT as T, LAYERS } from "../config";
 // const getArg = arg => (arg ? `'${arg}'` : null);
 
 function getLayerToggle(layerId) {
@@ -26,7 +26,7 @@ function getFilterItemToggle(layerId, value) {
 }
 
 export default allLayers =>
-  html`<div id="legend-wrapper" class="legend-wrapper">
+  nanoHtml`<div id="legend-wrapper" class="legend-wrapper">
     <h4 class="overlay-box toggle-button" onclick="${toggleLegend}">
         ${T.LEGEND_TITLE}
         <span id="legend-toggle-icon"></span>
@@ -51,8 +51,9 @@ export default allLayers =>
 	</div>
 </div>`;
 
-const legendItem = ({ name, color, label }) => html`
+const legendItem = ({ name, color, label }) => nanoHtml`
   <div
+    title="${T.LEGEND_ITEM_TOOLTIP_PREFIX} ${label}"
     class="legend-item"
     id="${name}"
     onclick=${getLayerToggle(name)}
@@ -61,8 +62,9 @@ const legendItem = ({ name, color, label }) => html`
     <span class="label">${label}</span>
   </div>`;
 
-const legendItemChild = ({ value, layerId, color, label }) => html`
+const legendItemChild = ({ value, layerId, color, label }) => nanoHtml`
     <div
+      title="${T.LEGEND_ITEM_TOOLTIP_PREFIX} ${LAYERS[layerId].label}: ${value}"
       class="legend-item"
       id="${layerId}-${value}"
       onclick=${getFilterItemToggle(layerId, value)}
@@ -72,10 +74,19 @@ const legendItemChild = ({ value, layerId, color, label }) => html`
     </div>
 `;
 
-const legendItemWithFilters = ({ name, color, label, filters }) => html`
-  <div class="legend-item" id="${name}">
+const legendItemWithFilters = ({ name, color, label, filters }) => nanoHtml`
+  <div
+    class="legend-item"
+    id="${name}"
+  >
     <span class="legend-key" style="background-color: ${color}"></span>
-    <span class="label" onclick=${getFilterLayerToggle(name)}>${label}</span>
+    <span
+        class="label"
+        title="${T.LEGEND_ITEM_TOOLTIP_PREFIX} ${label}"
+        onclick=${getFilterLayerToggle(name)}
+      >
+        ${label}
+      </span>
     <div class="legend-items">
       ${filters.map(legendItemChild)}
     </div>
