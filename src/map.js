@@ -60,7 +60,7 @@ export function createCompass(map) {
 
   compass.onclick = () => {
     map.flyTo({
-      center: DEFAULT_MAP.center
+      center: MAP.center
     });
   };
   leftEl.appendChild(compass);
@@ -72,7 +72,9 @@ export default function getMap() {
     Object.assign(DEFAULT_MAP, MAP)
   );
 
-  const popup = new mapboxgl.Popup({ keepInView: true, maxWidth: "240px" });
+  const popup = new mapboxgl.Popup({
+    maxWidth: "240px"
+  });
 
   // Create a mapboxgl.Popup from the default popup component.
   const showPopup = feature => {
@@ -81,10 +83,10 @@ export default function getMap() {
       .setHTML(popupComponent(feature))
       .addTo(map);
     popup.on("close", () => {
-      map.flyTo({
-        center: DEFAULT_MAP.center,
-        duration: ANIMATION_DURATION
-      });
+      // map.flyTo({
+      //   center: DEFAULT_MAP.center,
+      //   duration: ANIMATION_DURATION
+      // });
     });
 
     return popup;
@@ -92,7 +94,7 @@ export default function getMap() {
 
   // HANDLE MAP EVENTS
 
-  Object.entries(LAYERS)
+  Object.entries(LAYERS) // [['toggle-sectores', { hasPopus: false}]]
     .filter(([, layerConfig]) => layerConfig.hasPopups)
     .forEach(([layerId]) => {
       map.on("click", layerId, e => {
