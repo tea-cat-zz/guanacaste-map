@@ -1,7 +1,8 @@
 const es = {
   LEGEND_TITLE: "Puestos Estaciónes y Tourismos",
-  LEGEND_VIEW_ALL: "Ver Todo",
-  LEGEND_VIEW_NONE: "Ver Nunca",
+  LEGEND_VIEW_ALL: "Muestra Todo",
+  LEGEND_VIEW_NONE: "Muestra Nada",
+  LEGEND_ITEM_TOOLTIP_PREFIX: "Muestra u oculta", // prefix the legend item
   POPUP_IMAGE_ALT_PREFIX: "Image del Estación",
   POPUP_MORE_INFO: "Más informacíon"
 };

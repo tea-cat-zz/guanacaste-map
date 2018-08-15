@@ -1,7 +1,7 @@
 {
   "name": "parcel-sandbox",
   "version": "1.0.0",
-  "description": "Simple Parcel Sandbox",
+  "description": "Guanacaste Map using Mapbox",
   "main": "index.html",
   "scripts": {
     "start": "rm -rf docs .cache && parcel index.html --open -d docs",

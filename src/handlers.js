@@ -15,8 +15,15 @@ export const getLayerToggleHandler = map => layerId => {
   legendItem.classList.toggle("active");
   // toggle state
   map.visibleLayers[layerId] = !map.visibleLayers[layerId];
+
   const isToggledOn = map.visibleLayers[layerId];
   const visibility = isToggledOn ? "visible" : "none";
+  const { combineWithLayers } = LAYERS[layerId];
+  if (combineWithLayers) {
+    combineWithLayers.forEach(layerName =>
+      map.setLayoutProperty(layerName, "visibility", visibility)
+    );
+  }
   // toggle layer visibility
   return map.setLayoutProperty(layerId, "visibility", visibility);
 };
