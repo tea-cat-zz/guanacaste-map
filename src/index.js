@@ -1,4 +1,3 @@
-/* global tcat */
 /* eslint-disable no-irregular-whitespace */
 
 import legendComponent from "./components/legend";
@@ -16,7 +15,7 @@ map.layerList = [];
 
 // debugging only
 // window.map = map;
-window.tcat = tcat || {};
+window.tcat = window.tcat || {};
 
 map.on("data", () => {
   if (!map.initialLoaded && !map.loaded()) {

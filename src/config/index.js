@@ -19,13 +19,14 @@ const MAP = {
   //maxBounds
 };
 
+// Mapbox access token
 const ACCESS_TOKEN =
   "pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww";
 
 module.exports = Object.freeze({
-  LAYER_PREFIX: "toggle-",
-  LAYERS_ACTIVE: false,
-  ANIMATION_DURATION: 2000,
+  LAYER_PREFIX: "toggle-", // the layer name prefix used to determine top-level filter layers
+  LAYERS_ACTIVE: false, // are the layers all active or disabled by default?
+  ANIMATION_DURATION: 2000, // duration in ms for fly/pan animation
   ACCESS_TOKEN,
   MAP,
   LAYERS: layers,
