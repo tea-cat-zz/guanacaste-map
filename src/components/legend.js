@@ -1,5 +1,3 @@
-/* global tcat */
-
 import nanoHtml from "nanohtml";
 
 import { toggleLegend } from "../handlers";
@@ -10,20 +8,20 @@ import { TEXT as T, LAYERS } from "../config";
 function getLayerToggle(layerId) {
   return function toggleLayer(e) {
     e.preventDefault();
-    tcat.handleLayerToggle(layerId);
+    window.tcat.handleLayerToggle(layerId);
   };
 }
 function getFilterLayerToggle(layerId) {
   return function toggleFilterLayer(e) {
     e.preventDefault();
-    tcat.handleFilterLayerToggle(layerId);
+    window.tcat.handleFilterLayerToggle(layerId);
   };
 }
 
 function getFilterItemToggle(layerId, value) {
   return function toggleFilterItem(e) {
     e.preventDefault();
-    tcat.handleFilterToggle(layerId, value);
+    window.tcat.handleFilterToggle(layerId, value);
   };
 }
 
@@ -44,10 +42,10 @@ export default allLayers =>
 			</div>
       <div id="legend-footer" class="overlay-box toggle-content">
         <button class="button button-block-on-mobile" onclick=${
-          tcat.handleShowAll
+          window.tcat.handleShowAll
         }>${T.LEGEND_VIEW_ALL}</button>
         <button class="button button-block-on-mobile" onclick=${
-          tcat.handleHideAll
+          window.tcat.handleHideAll
         }>${T.LEGEND_VIEW_NONE}</button>
       </div>
 	</div>

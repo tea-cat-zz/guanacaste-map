@@ -1,4 +1,4 @@
-/* global mapboxgl, tcat */
+/* global mapboxgl */
 /* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
 
@@ -31,11 +31,11 @@ export const handleInitialLoad = map => {
   map.visibleLayers = getVisibleLayers(map.layerList, false);
   map.filteredLayers = getFilteredLayers(map.layerList);
   // HANDLE MAP LOAD
-  tcat.handleLayerToggle = getLayerToggleHandler(map);
-  tcat.handleFilterToggle = getFilterToggleHandler(map);
-  tcat.handleFilterLayerToggle = getFilterLayerToggleHandler(map);
-  tcat.handleShowAll = getShowAllHandler(map);
-  tcat.handleHideAll = getHideAllHandler(map);
+  window.tcat.handleLayerToggle = getLayerToggleHandler(map);
+  window.tcat.handleFilterToggle = getFilterToggleHandler(map);
+  window.tcat.handleFilterLayerToggle = getFilterLayerToggleHandler(map);
+  window.tcat.handleShowAll = getShowAllHandler(map);
+  window.tcat.handleHideAll = getHideAllHandler(map);
 };
 
 export const toggleLayer = (map, layerId, isVisible = true) => {
