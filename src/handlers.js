@@ -102,29 +102,48 @@ export const getFilterToggleHandler = map => (layerId, value) => {
   }
 };
 
+const toggleLayersAndCombinedLayers = (map, newState = "visible") => {
+  map.filteredLayers.map(layer => {
+    map.setLayoutProperty(layer.name, "visibility", newState);
+    if (LAYERS[layer.name] && LAYERS[layer.name].combineWithLayers) {
+      LAYERS[layer.name].combineWithLayers.forEach(additionalLayer => {
+        map.setLayoutProperty(additionalLayer, "visibility", newState);
+      });
+    }
+  });
+};
+
+const toggleFilterItems = (query, verb = "add", newClass = "active") => {
+  const legendItemEls = document.querySelectorAll(query);
+  [].forEach.call(legendItemEls, item => {
+    item.classList[verb](newClass);
+  });
+};
+
 /**
  * To reset the entire layer/filter state
  */
 export const getShowAllHandler = map => () => {
-  map.filteredLayers.map(layer =>
-    map.setLayoutProperty(layer.name, "visibility", "visible")
-  );
+  // toggle layers that start with toggle-
+  toggleLayersAndCombinedLayers(map, "visible");
+  // set filters
   map.filteredLayers.map(({ name }) => map.setFilter(name, null));
+
+  // reset the visible layers as we understand it in the data structure.
   map.visibleLayers = getVisibleLayers(map.layerList, true);
-  const legendItemEls = document.querySelectorAll(`.legend-item`);
-  [].forEach.call(legendItemEls, item => {
-    item.classList.add("active");
-  });
+
+  // Toggle active class
+  toggleFilterItems(".legend-item", "active");
 };
 
 /**
  * To hide the entire layer/filter state
  */
 export const getHideAllHandler = map => () => {
-  map.filteredLayers.map(layer =>
-    map.setLayoutProperty(layer.name, "visibility", "none")
-  );
+  toggleLayersAndCombinedLayers(map, "none");
   map.visibleLayers = getVisibleLayers(map.layerList);
+
+  // Toggle active class
   const legendItemEls = document.querySelectorAll(`.legend-item`);
   [].forEach.call(legendItemEls, item => {
     item.classList.remove("active");
