@@ -12,10 +12,10 @@ import { default as text } from "./text";
 const MAP = {
   style: "mapbox://styles/guanacaste/cjj079axn0aqu2so55fx6ln2x",
   center: [-85.61365526723557, 10.838261234356153],
-  zoom: 9.619976883678385,
+  zoom: 9.85,
   scrollZoom: false,
   maxZoom: 12.5,
-  minZoom: 9.619976883678385
+  minZoom: 9.85
   //maxBounds
 };
 
