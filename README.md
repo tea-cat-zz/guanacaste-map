@@ -14,7 +14,7 @@ Most of the files you'll ever want to bother with are in `src/config`! Changing 
 
 ### `index.js` : General Config
 
-- `MAP` is the config object that gets passed to the global app instance
+- `MAP` is the config object that gets passed to the `new mapbox.Map()` instance
 
 ### `text.js`: Text strings
 
