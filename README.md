@@ -1,6 +1,6 @@
 # guanacaste-map
 
-Created with CodeSandbox
+A tutoring project for web cartography, created with CodeSandbox
 
 ## Embed code
 
